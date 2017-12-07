@@ -1,0 +1,5 @@
+
+
+* Lägg till innehållet i "Gulpfile.js" i ../webapp i den nya "gulpfile.js" som Liferay skapat up.
+* "custom.css" skall döpas om till "_custom.scss"
+* 

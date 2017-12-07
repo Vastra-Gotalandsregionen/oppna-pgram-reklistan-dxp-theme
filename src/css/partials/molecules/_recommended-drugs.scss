@@ -1,0 +1,303 @@
+.section-details-generic h2,
+.section-details-advice h2,
+.subheading,
+.subheading-2,
+.area,
+.recommended-for,
+.substance,
+.infobox {
+	margin: 0;
+	@include margin-leader(1);
+
+	&.item-0 {
+		margin-top: 0;
+	}
+}
+
+.section-details-generic h2,
+.section-details-advice h2,
+.subheading {
+	color: $details-color;
+	font-weight: $bold-font-weight;
+	font-size: 16px;
+}
+
+.subheading-2 {
+	color: $details-color;
+//	font-size: 16px;
+}
+
+.area {
+	font-weight: $bold-font-weight;
+//	font-size: 16px;
+}
+
+.recommended-for {
+	font-style: italic;
+}	
+
+.substance {
+
+}
+
+.drug {
+	padding-left: 1em;
+}
+
+.advice-infobox-small,
+.infobox {
+	background-color: $details-infobox-background-color;
+	border-left: 5px solid $details-infobox-left-border;
+	@include rhythm(0, 0.5, 0.5, 0);
+	padding-left: 1em;
+	padding-right: 1em;
+	margin-top: 1em;
+}
+
+.infobox-drug {
+	margin-left: 1em; // same as .drug
+}
+
+
+
+
+.replaceable {
+	color: $details-replaceable-color;
+}
+
+.lt-ie9 {
+	.replaceable {
+		font-family: Lucida Sans Unicode, Arial Unicode MS, Arial;
+	}
+}
+
+
+
+
+.advice-drugs {
+	background-color: $color-gray-temp;
+//	border: 1px solid $color-gray-temp4;
+	padding: 1em;
+	margin: 1em 0;
+
+	ul {
+		margin: 0;
+		padding: 0 0 0 1em;
+		list-style-type: none;
+	}
+
+	li {
+		list-style-type: none;
+
+	}	
+
+	.advice-subheading {
+		padding-bottom: 1em;
+		padding-top: 0;
+		border-bottom: 1px solid $color-gray-temp4;
+		margin-bottom: 0.75em;
+		text-align: center;
+	}
+}
+
+
+.child-icon {
+	width: 34px;
+	height: 34px;
+	padding: 1em 1em 0 0;
+	float: left;
+}
+
+
+
+// .advice-for-childs {
+
+// 	&:before{
+// 		content: '\003C 18';
+// 		display: block;
+// 		position:relative;
+// 		float: left;
+// 		width:34px;
+// 		border-radius:17px;
+// 		padding:17px 0;
+// 		line-height:0;
+// 		background: $color-vgr-blue;
+// 		color: $color-white;
+// 		text-align:center;
+// 		font-size: 12px;
+// 		margin: 1.25em 1em 0 0;
+// 	}
+
+// }
+
+/**
+ * Images
+ *
+ */
+.details-image {
+	width: 100%;
+	text-align: center;
+
+	a {
+		border: none;
+	}
+
+	img {
+		max-width: 100%;
+		@include rhythm(0, 1, 0, 0);
+	}
+
+	.fullscreen-link {
+		display: block;
+		padding-left: 1em;
+		padding-right: 1em;
+		@include rhythm(0, 1, 1, 0);
+		background-color: $color-vgr-yellow-light;
+
+		color: $color-black;
+
+		&:visited,
+		&:active
+		&:hover {
+			color: $color-black;
+		}
+	
+		@include medium {
+			@include nowrap-links-normal();
+				background-color: transparent;
+		}
+	}
+}
+
+.no-touch .details-image .fullscreen-link {
+	&:hover,
+	&:active {
+		background-color: $color-vgr-yellow;
+	}
+
+	@include medium {
+		&:hover,
+		&:active {
+			background-color: transparent;
+		}		
+	}
+}		
+
+
+/**
+ * Tables
+ *
+ */
+.is-mobile-small {
+	table.stacktable-original {
+		display: none;
+	}
+
+	table.stacktable {
+		display: table;
+	}
+}
+
+.force-stacktable {
+	table.stacktable {
+		max-width: 320px !important;
+		display: table !important;
+	}
+
+	table.stacktable-original {
+		display: none !important;
+	}
+}
+
+.section-details-generic,
+.section-details-advice {
+	table {
+		border: none;
+		background-color: $details-table-background-color;
+		width: 100%;
+
+		&.stacktable-original {
+			display: none;
+			@include small {
+				display: table;
+			}			
+		}
+
+		&.stacktable {
+			display: table;
+			@include small {
+				display: none;
+			}
+		}
+	}
+
+	td, th {
+		border-width: 0;
+		@include rhythm(0, 0.25, 0.25, 0);
+		padding-left: 1em;
+		padding-right: 1em;
+		vertical-align: top;
+
+		&.st-divider {
+			background-color: $color-gray-temp4;
+			height: 1px;
+			padding: 0;
+			margin: 0;
+		}
+	}
+
+	th {
+		font-weight: $bold-font-weight;
+		color: $details-table-header-color;
+		background-color: $details-table-header-background-color;
+		text-align: left;
+
+		&.st-head-row {
+			@include text-color-primary();			
+			background-color: $color-gray-temp4;
+		}
+	}
+
+	table.borders {
+		td {
+			border: 1px solid $color-gray-temp4;
+		}
+
+		th {
+			border: 1px solid $details-table-header-background-color;
+		}
+	}
+}
+
+/**
+ * ADVICE: Infobox medium
+ *
+ */
+ .advice-infobox-medium {
+ 	border: 2px solid $details-infobox-border-color;
+ 	@include rhythm(0, 0.5, 0.5, 0);
+ 	padding-left: 1em;
+ 	padding-right: 1em;
+ }
+
+ /**
+  * DRUGS: Infobox Heading
+  *
+  */
+  .infobox-heading {
+  	@include margin-trailer(1);
+
+  	h3 {
+  		color: $details-infobox-heading-heading-color;
+		font-size: 15px;
+		line-height: 16px;
+		font-weight: $bold-font-weight;
+		@include rhythm(0, 0.25, 0.25, 0);
+  	}
+  }
+
+
+.details-physical-exercise-meta {
+	text-align: right;
+	font-style: italic;
+}

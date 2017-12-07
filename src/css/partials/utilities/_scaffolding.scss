@@ -1,0 +1,155 @@
+#details-generic {
+    display: none;
+}
+
+.showing-generic {
+    #submenu-drugs,
+    #submenu-advice,
+    #details-drugs,
+    #details-advice,
+    #details-filler {
+        display: none;
+    }
+
+    #details-generic {
+        display: block;
+    }
+
+    @include medium {
+        #mainmenu {
+            display: block;
+        }
+    }
+}
+
+.showing-mainmenu {
+    #submenu-drugs,
+    #submenu-advice,
+    #details-drugs,
+    #details-advice {
+        display: none;
+    }
+}
+
+.showing-submenu {
+    #details-drugs,
+    #details-advice {
+        display: none;
+    }
+}
+
+.showing-details {
+    #details-filler {
+        display: none;
+    }
+}
+
+#details-filler {
+    display: none;
+    background-color: $color-white;
+}
+
+.screen {
+	width: 100%;
+    background-color: $color-white;
+
+    display: none;
+
+    &.active {
+        display: block;
+    }
+
+    .section-details {
+        padding: 14px 16px;
+    }
+
+}
+
+@include medium {
+    #app-wrapper {
+        max-width: 1000px;
+        margin: 0 auto;
+        height: 100%;
+    }
+
+    #app-wrapper.showing-adminbar {
+        height: calc(100% - 56px - 10px);
+    }
+
+    #topbar {
+        width: 1000px;
+        height: $appbar-height;
+        position: fixed;
+        z-index:999;
+    }
+
+    .app-body {
+        width:100%;
+        height:100%;
+    }
+
+    #submenu-drugs,
+    #submenu-advice,
+    #mainmenu {
+        padding-top: $appbar-height;
+        width: $tablet-left-menu-width;
+        height: 100%;
+        box-sizing: border-box;
+        position: fixed;
+        z-index: 99;
+        overflow: auto;
+//        display: block; // Always displays due to specificity
+
+        border-right: 1px solid $color-gray-temp4;
+        border-right: 1px solid $color-gray-temp4-alpha;
+    }
+
+    #details-filler,
+    #details-drugs,
+    #details-advice,
+    #details-generic, {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding-left:$tablet-left-menu-width;
+        box-sizing:border-box;
+        padding-top: $appbar-height;
+        overflow: auto;
+    }
+
+    .screen {
+        &.active-submenu {
+            display: block;
+        }
+    }
+
+    #details-filler {
+        display: block;
+    }
+
+}
+
+@include large {
+    #submenu-drugs,
+    #submenu-advice,
+    #mainmenu {
+        width: $desktop-left-menu-width;
+    }
+
+    #details-generic,
+    #details-filler,
+    #details-drugs,
+    #details-advice {
+        padding-left:$desktop-left-menu-width;
+    }
+
+}
+
+#details-filler-placeholder,
+#main-menu-placeholder {
+    @include single-transition(opacity, 350ms);
+    opacity: 0.5;
+    &.on {
+        opacity: 1;
+    }
+}

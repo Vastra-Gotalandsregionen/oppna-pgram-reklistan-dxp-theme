@@ -1,0 +1,126 @@
+$text-inverse-color: $color-white;
+@mixin text-inverse {
+  color: $text-inverse-color;
+}
+
+@mixin link-inverse {
+    a,
+    a:hover,
+    a:visited,
+    a:active {
+        color: $color-white;
+    }
+
+}
+
+// Mediaqueries
+
+@mixin xsmall {
+  @media screen and (min-width : $bp-xsmall) {
+    @content;
+  }
+}
+
+@mixin small {
+	@media screen and (min-width : $bp-small) {
+		@content;
+	}
+}
+
+@mixin medium {
+	@media screen and (min-width : $bp-medium) {
+		@content;
+	}
+}
+
+@mixin large {
+	@media screen and (min-width : $bp-large) {
+		@content;
+	}
+}
+
+@mixin max-small {
+  @media screen and (max-width : $bp-small) {
+    @content;
+  }
+}
+
+@mixin max-medium {
+  @media screen and (max-width : $bp-medium) {
+    @content;
+  }
+}
+
+// Clearfix
+// --------
+// For clearing floats like a boss h5bp.com/q
+@mixin clearfix {
+  *zoom: 1;
+
+  &:before,
+  &:after {
+    display: table;
+    content: '';
+    // Fixes Opera/contenteditable bug:
+    // http://nicolasgallagher.com/micro-clearfix-hack/#comment-36952
+    line-height: 0;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+// Colors when user select text. Preferebly set in body {}
+// --------
+@mixin markedtext($bg-color, $font-color) {
+  ::selection {
+    background: $bg-color;
+    color: $font-color;
+  }
+  ::-moz-selection {
+    background: $bg-color;
+    color: $font-color;
+  }
+}
+
+
+// Underline. For creating beautiful underlining (commonly of links)
+// Read more https://github.com/Team-Sass/toolkit
+// --------
+@mixin underline($background: #fff, $color: #000, $clear-descenders: true, $distance: 1, $width: 2, $extend: false) {
+
+  $px: .0625em;
+
+  @include underline-core($extend);
+
+  @if mixin-exists(background-image) and function-exists(linear-gradient) {
+    @include background-image(
+      linear-gradient(bottom, $background 75%, $color 75%)
+    );
+  }
+  @else {
+    background-image: linear-gradient(to top, $background 75%, $color 75%);
+  }
+  background-size: (2 * $px) ((1 + $width) * $px);
+  background-position: 0 (($width) * $px) + $distance;
+
+  @if $clear-descenders {
+    text-shadow: (1 * $px) (1 * $px) 0 $background, (-1 * $px) 0 0 $background;
+  }
+}
+
+@mixin underline-core($extend: null) {
+  $extend: if($extend != null, $extend, toolkit-get('underline extend'));
+
+  @if $extend {
+    @include dynamic-extend('underline') {
+      @include underline-core(false);
+    }
+  }
+  @else {
+    text-decoration: none;
+    background-repeat: repeat-x;
+  }
+}
+

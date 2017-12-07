@@ -1,0 +1,92 @@
+.vgr-logo {
+	text-align: center;
+	margin-top: 56px;
+}
+
+
+/*
+.meta-navigation {
+
+	width: 60%;
+	margin: 0 auto;
+
+	ul {
+		border: 1px solid rgba(0, 0, 0, 0.12);
+		list-style-type: none;
+		padding: 0;
+	}
+
+	li {
+		list-style-type: none;
+	}
+
+	a, 
+	a:visited {
+    	color: rgba(0, 0, 0, 0.57);
+	}
+
+	a {
+		color: rgba(0, 0, 0, 0.57);
+		display: block;
+		padding: 0.5em 1em;
+		
+		transition: background-color 250ms;		
+	}
+
+	.no-touch & a:hover {
+		background-color: rgba(0, 0, 0, 0.12);
+	}
+
+}
+*/
+
+.details-inner {
+	width: 404px;
+	margin: 0 auto;
+}
+
+
+.link-list {
+
+
+	h2 {
+		margin: 5px;
+		@include rhythm(1, 0, 0, 0);
+		font-size: 20px;
+		font-weight: 300;
+	}
+
+	ul {
+		list-style-type: none;
+		
+
+
+		margin: 5px;
+		padding: 0;
+	}
+
+	li {
+		list-style-type: none;
+		padding: 0;
+		@include border-bottom-line();
+	}
+
+	a, 
+	a:visited {
+    	color: rgba(0, 0, 0, 0.57);
+	}
+
+	a {
+		color: rgba(0, 0, 0, 0.57);
+		padding: 7px 14px;	
+		display: block;	
+		text-decoration: none;
+
+//		transition: background-color 150ms;		
+	}
+
+	.no-touch & a:hover {
+		background-color: $color-yellow-halfandhalf;
+	}	
+
+}

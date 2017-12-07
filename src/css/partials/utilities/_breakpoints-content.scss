@@ -1,0 +1,31 @@
+.mt-small--inline {
+    display: none;
+    @include small {
+        display: inline;
+    }
+}
+
+.mt-small {
+    display: none;
+    @include small {
+        display: block;
+    }
+}
+
+.lt-medium {
+    @include medium {
+        display: none;
+    }
+}
+
+.mt-only-small--inline {
+	display: none;
+
+	@include small {
+		display: inline
+	}
+
+	@include medium {
+		display: none;
+	}
+}

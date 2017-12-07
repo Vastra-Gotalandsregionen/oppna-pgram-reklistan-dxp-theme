@@ -1,0 +1,239 @@
+@import '../../aui_variables';
+
+
+// Breakpoints
+// -------------------------
+$bp-xsmall : 400px;
+$bp-small : 600px;
+$bp-medium : 768px;
+$bp-large : 1000px;
+
+
+// Colors - contansts
+// -------------------------
+$color-white: rgb(255, 255, 255);
+$color-black: rgb(0, 0, 0);
+$color-blue: rgb(66, 133, 244); // VGR Blue: rgb(56, 98, 144)
+$color-teal: rgb(0, 150, 136);
+$color-brown: rgb(121, 85, 72);
+$color-gray-gallery: rgb(236, 236, 236);
+$color-yellow-halfandhalf: rgb(252, 255, 223);
+
+$color-vgr-red:		rgb(133, 26, 49);
+$color-vgr-blue: 	rgb(0, 82, 146);
+$color-vgr-green: 	rgb(096, 117, 57);
+$color-vgr-yellow: 	rgb(225, 168, 0);
+
+$color-vgr-red-light:		rgba(133, 26, 49, 0.7);
+$color-vgr-blue-light:	 	rgba(0, 82, 146, 0.7);
+$color-vgr-green-light: 	rgba(096, 117, 57, 0.7);
+$color-vgr-yellow-light: 	rgba(225, 168, 0, 0.7);
+
+
+$color-gray-temp: rgb(250, 250, 250);
+$color-gray-temp1: rgb(150, 150, 150);
+$color-gray-temp2: rgb(185, 185, 185);
+
+$color-gray-temp4: rgb(218, 218, 218);
+$color-gray-temp4-alpha: rgba(0, 0, 0, 0.12);
+
+
+@mixin bg-color-dimmer {
+	background-color: rgb(218, 218, 218);
+	background-color: rgba(200, 200, 200, 0.6);
+}
+
+@mixin bg-color-gray-temp {
+	background-color: $color-gray-temp;
+}
+
+
+$link-color: $color-vgr-blue;
+$link-color-hover: $color-vgr-blue-light;
+
+$primary-color: $color-vgr-blue;
+
+$tabs-color: $color-gray-temp1;
+$tabs-background-color: $color-gray-temp;
+$tabs-marking-color: $primary-color;
+
+$appbar-background-color: $primary-color;
+
+$details-color: $primary-color;
+
+$details-infobox-left-border: $primary-color;
+$details-infobox-background-color: $color-gray-temp;
+
+
+$details-replaceable-color: $primary-color;
+
+$details-table-header-background-color: $primary-color;
+$details-table-header-color: $color-white;
+$details-table-background-color: $color-gray-temp;
+
+$details-infobox-border-color: $primary-color;
+$details-infobox-heading-heading-color: $primary-color;
+
+
+@mixin border-bottom-line {
+	border-bottom: 1px solid $color-gray-temp4;
+	border-bottom: 1px solid $color-gray-temp4-alpha;
+}
+
+@mixin border-top-line {
+	border-top: 1px solid $color-gray-temp4;
+	border-top: 1px solid $color-gray-temp4-alpha;
+}
+
+@mixin color-list-hover {
+	background-color: rgb(242, 242, 242);
+	background-color: rgba(0, 0, 0, 0.05);
+}
+
+
+
+// Fonts
+// -------------------------
+$base-font-size: 	14px;
+$base-line-height:	21px;
+$base-font-weight:	400;
+$bold-font-weight:	500;
+
+@mixin text-color-primary {
+	color: rgb(0, 0, 0);
+	color: rgba(0, 0, 0, 0.87);
+}
+
+@mixin text-color-secondary {
+	color: rgb(0, 0, 0);
+	color: rgba(0, 0, 0, 0.87);
+}
+
+@mixin text-color-disabled {
+	color: rgb(0, 0, 0);
+	color: rgba(0, 0, 0, 0.87);
+}
+
+
+/**
+ * Margins
+ *
+ */
+ 
+
+
+
+/**
+ * Sizes
+ *
+ */
+$full-row-height: 56px;
+
+
+$appbar-height: $full-row-height;
+$desktop-left-menu-width: 350px;
+$tablet-left-menu-width: 290px;
+
+
+
+
+// Material colors palette
+// -------------------------
+$red: #F44336;
+$pink: #E91E63;
+$purple: #9C27B0;
+$deeppurple: #673AB7;
+$indigo: #3F51B5;
+$lightblue: #03A9F4;
+$cyan: #00BCD4;
+$teal: #009688;
+$lightgreen: #8BC34A;
+$lime: #CDDC39;
+$lightyellow: #FFEB3B;
+$orange: #FF9800;
+$deeporange: #FF5722;
+$grey: #9E9E9E;
+$bluegrey: #607D8B;
+$brown: #795548;
+$lightgrey: #ECECEC;
+
+// Bootstrap shades
+// -------------------------
+$primary: #4285F4;
+$success: #0F9D58;
+$info: $lightblue;
+$warning: $deeporange;
+$danger: $red;
+
+// Typography elements for Material
+// -------------------------
+$darkbg-text: rgba(255,255,255,0.84);
+$lightbg-text: rgba(0,0,0,0.84);
+$icon-color: rgba(0,0,0,0.5);
+
+
+// Bootstrap variables
+// -------------------------
+$btn-default: #FFF;
+$btn-default-text: $lightbg-text;
+
+$btn-primary: $primary;
+$btn-primary-text: $darkbg-text;
+
+$btn-success: $success;
+$btn-success-text: $darkbg-text;
+
+$btn-info: $info;
+$btn-info-text: $darkbg-text;
+
+$btn-warning: $warning;
+$btn-warning-text: $darkbg-text;
+
+$btn-danger: $danger;
+$btn-danger-text: $darkbg-text;
+
+$input-unchecked: rgba(137, 137, 137, 0.3);
+$input-checked: rgba(15, 157, 88, 0.3);
+
+$radio-default: $lightbg-text;
+$radio-primary: $primary;
+$radio-success: $success;
+$radio-info:    $info;
+$radio-warning: $warning;
+$radio-danger:  $danger;
+
+$input-danger: $danger;
+$input-default: #5264AE;
+$input-warning: $warning;
+$input-success: $success;
+$input-info:    $info;
+
+$navbar-danger-bg: $danger;
+$navbar-inverse-bg: #5264AE;
+$navbar-warning-bg: $warning;
+$navbar-success-bg: $success;
+$navbar-info-bg:    $info;
+$navbar-default-bg: $primary;
+$navbar-color: $darkbg-text;
+$navbar-link-color: $darkbg-text;
+$navbar-link-hover-color: $darkbg-text;
+$navbar-link-hover-bg: transparent;
+$navbar-link-active-color: $darkbg-text;
+$navbar-link-active-bg: rgba(0,0,0,0.05);
+$navbar-link-disabled-color: #E5E5E5;
+$navbar-link-disabled-bg: transparent;
+$navbar-brand-color: $darkbg-text;
+$navbar-toggle-border-color: $darkbg-text;
+$navbar-toggle-hover-bg: transparent;
+$navbar-toggle-icon-bar-bg: $darkbg-text;
+$navbar-border: $darkbg-text;
+
+$alert-success: $success;
+$alert-info: $info;
+$alert-warning: $warning;
+$alert-danger: $danger;
+
+$progress-success: $success;
+$progress-info: $info;
+$progress-warning: $warning;
+$progress-danger: $danger;

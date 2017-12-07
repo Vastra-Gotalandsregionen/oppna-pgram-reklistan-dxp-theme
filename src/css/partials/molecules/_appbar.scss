@@ -1,0 +1,141 @@
+.appbar {
+    background-color: $appbar-background-color;
+	@include text-inverse();
+	@include link-inverse();
+    @extend .shadow-z-1;
+
+    height: 56px;
+    width: 100%;
+}
+
+.appbar-menu-search-wrapper,
+.appbar-menu-sink-menu-toggle,
+.appbar-menu-title-wrapper,
+.appbar-menu-back-wrapper {
+    outline: none;
+    height: $appbar-height;
+}
+
+
+.appbar-menu-search-button, 
+.appbar-menu-sink-button,
+.appbar-menu-back-button {
+    background: none;
+    border: none;
+    @include text-inverse();
+    line-height: $appbar-height;
+    float: left;
+}
+
+/**
+ * Title
+ *
+ */
+ .appbar-menu-title-wrapper {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-weight: 800;
+
+    .thin {
+        font-weight: 300;
+    }
+}
+
+.appbar-menu-title {
+    line-height: $appbar-height;
+    padding: 0 13px;
+    font-size: 20px;
+
+    a,
+    a:visited,
+    a:active,
+    a:hover {
+        color: $color-white;
+        text-decoration: none;
+    }
+
+}
+
+/**
+ * Hamburger icon
+ *
+ */
+.appbar-menu-sink-wrapper {
+    position: absolute;
+    height: $appbar-height;
+
+    @include translate(-50px, 0);
+    @include opacity(0);
+    @include single-transition(all, 350ms);
+}
+
+.showing-mainmenu {
+    .appbar-menu-sink-wrapper {
+        cursor: pointer;
+        @include opacity(1);
+        @include translate(0, 0);
+
+        @include medium {
+            display: none;
+        }
+    }
+}
+
+/**
+ * Back icon
+ *
+ */
+.appbar-menu-back-wrapper {
+    position: absolute;
+    cursor: pointer;
+    height: $appbar-height;
+
+    @include translate(0, 0);
+    @include opacity(1);
+    @include single-transition(all, 350ms);
+
+    display: none;
+    &.on {
+        display: block;
+    }
+}
+
+.showing-mainmenu {
+    .appbar-menu-back-wrapper {
+        cursor: default;
+        @include opacity(0);
+        @include translate(50px, 0);
+    }
+}
+
+.appbar-menu-back-label {
+    line-height: $appbar-height;
+    font-size: 20px;
+    float: left;
+    font-weight: 300;
+}
+
+
+/**
+ * Feedback link
+ *
+ */
+ .appbar-menu-feedback {
+    position: absolute;
+    right: 0;
+    display: block;
+    line-height: $appbar-height;
+    font-size: 18px;
+    font-weight: 300;
+    padding: 0 16px;
+    outline: none;
+
+    text-decoration: none; 
+    &:visited,
+    &:hover,
+    &:active {
+        text-decoration: none;
+    }
+
+}

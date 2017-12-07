@@ -1,0 +1,23 @@
+html, body {
+    height: 100%;
+}
+
+$body-background-color: $color-gray-gallery;
+
+body {
+	@include text-color-primary();
+	background-color: $body-background-color;
+
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+
+	&.no-scroll {
+		overflow: hidden;
+	}
+
+}
+
+
+p {
+	@include rhythm(0, 0.5, 0.5, 0);
+}
