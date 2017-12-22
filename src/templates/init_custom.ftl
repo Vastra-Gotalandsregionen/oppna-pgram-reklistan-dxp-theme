@@ -7,7 +7,9 @@
 
 
 <#assign browserId = 'other'>
-<#assign ReleaseLocalService = serviceLocator.findService("com.liferay.portal.service.ReleaseLocalService") />
+<#assign ReleaseLocalService = serviceLocator.findService("com.liferay.portal.kernel.service.ReleaseLocalService") />
+<#assign authTokenUtil = serviceLocator.findService("com.liferay.portal.kernel.security.auth.AuthTokenUtil") />
 <#assign liferayBuild = ReleaseLocalService.getBuildNumberOrCreate() />
+<#assign authToken = authTokenUtil.getToken(request) />
 
 <#assign currentUserSignedIn = themeDisplay.isSignedIn() />

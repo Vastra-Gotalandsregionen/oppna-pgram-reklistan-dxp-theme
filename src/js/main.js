@@ -123,34 +123,39 @@ function downloadResources(){
         $('.js-loading-indicator').addClass('on');
     }, 500);
 
+    var p_auth = window.authToken;
     var urls = {
-        drugs: '/api/jsonws/skinny-web.skinny/get-skinny-journal-articles/' +
+        drugs: '/api/jsonws/skinny.skinny/get-skinny-journal-articles/' +
         'company-id/' + rekData.properties.companyId +
         '/group-name/' + rekData.properties.groupName +
         '/ddm-structure-id/' + rekData.properties.drugsStructureId +
-        '/locale/' + rekData.properties.locale,
+        '/locale/' + rekData.properties.locale +
+        '?p_auth=' + p_auth,
 
-        advice: '/api/jsonws/skinny-web.skinny/get-skinny-journal-articles/' +
+        advice: '/api/jsonws/skinny.skinny/get-skinny-journal-articles/' +
         'company-id/' + rekData.properties.companyId +
         '/group-name/' + rekData.properties.groupName +
         '/ddm-structure-id/' + rekData.properties.adviceStructureId +
-        '/locale/' + rekData.properties.locale,
+        '/locale/' + rekData.properties.locale +
+        '?p_auth=' + p_auth,
 
-        resources: '/api/jsonws/skinny-web.skinny/get-skinny-journal-articles/' +
+        resources: '/api/jsonws/skinny.skinny/get-skinny-journal-articles/' +
         'company-id/' + rekData.properties.companyId +
         '/group-name/' + rekData.properties.groupName +
         '/ddm-structure-id/' + rekData.properties.resourcesStructureId +
-        '/locale/' + rekData.properties.locale,
+        '/locale/' + rekData.properties.locale +
+        '?p_auth=' + p_auth,
 
-        news: '/api/jsonws/skinny-web.skinny/get-skinny-journal-articles/' +
+        news: '/api/jsonws/skinny.skinny/get-skinny-journal-articles/' +
         'company-id/' + rekData.properties.companyId +
         '/group-name/' + rekData.properties.groupName +
         '/ddm-structure-id/' + rekData.properties.newsStructureId +
-        '/locale/' + rekData.properties.locale,
+        '/locale/' + rekData.properties.locale +
+        '?p_auth=' + p_auth,
 
-        hbsDrugs: '/reklistan-theme/handlebars/details-drugs.hbs',
-        hbsAdvice: '/reklistan-theme/handlebars/details-advice.hbs',
-        hbsResources: '/reklistan-theme/handlebars/resources.hbs'
+        hbsDrugs: '/o/reklistan-dxp-theme/handlebars/details-drugs.hbs',
+        hbsAdvice: '/o/reklistan-dxp-theme/handlebars/details-advice.hbs',
+        hbsResources: '/o/reklistan-dxp-theme/handlebars/resources.hbs'
     };
 
     $.when(
@@ -852,7 +857,7 @@ function wwMangleSearchData(dataDrugs, dataAdvice){
     if(!window.Worker) {
         return;
     }
-    var worker = new Worker("/reklistan-theme/js/webworker-searchdata.js");
+    var worker = new Worker("/o/reklistan-dxp-theme/js/webworker-searchdata.js");
     worker.postMessage(JSON.stringify({
         dataDrugs: dataDrugs,
         dataAdvice: dataAdvice
@@ -897,7 +902,7 @@ function registerHandlebarHelpers() {
 
         // Convert {{replaceable}} with icon
         text = text.replace(/\{\{replaceable\}\}/g, '<span class="replaceable">&#8860;</span>');
-        text = text.replace(/\{\{child\}\}/g, '<img src="/reklistan-theme/images/theme/child.png" class="child-icon">');
+        text = text.replace(/\{\{child\}\}/g, '<img src="/o/reklistan-dxp-theme/images/theme/child.png" class="child-icon">');
 
         // Make sure external links open in new tab/window
         text = text.replace(/href=[\"\'](http[s]?\:\/\/[^\"\']+)[\"\']/gi, 'href="$1" target="_blank"');
