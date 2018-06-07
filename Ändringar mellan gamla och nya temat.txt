@@ -1,9 +1,23 @@
 
-
+Temat
+----------
 * Lägg till innehållet i "Gulpfile.js" i ../webapp i den nya "gulpfile.js" som Liferay skapat up.
 * "custom.css" skall döpas om till "_custom.scss"
-*
+* Skapa en "main.css", som skriver över Liferays version, med innehållet: "@import "_custom.scss";".
+* Ändra alla URL:er till temat så att de matchar namnet på temat. (Om temat har nytt namn)
+* Lägga till så att JSON-WS använder "p_auth"-parametern.
 
+
+Skinny-web
+-----------
+Byggt om hela Skinny-JSON så att den är en OSGi-modul. Annars fungerar den inte i Liferay DXP.
+Har skapat en branch (dxp-update) i repot där alla ändringar finns incheckade.
+
+
+REK-listan app
+---------------
+Har försökt bygga appen, men inte lyckats. Det verkar krävas en hel del för att få den up-to-date med NativeScript och därmed fungerar att bygga.
+Behöver troligen kontakta Emil och se om han kan få den att bygga med senaste NativeScript.
 
 
 
