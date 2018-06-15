@@ -26,11 +26,11 @@ var rekData = {
     properties: {
 
         // Local Dev
-        companyId: 20116,
-        drugsStructureId: 31481,
-        adviceStructureId: 31439,
-        resourcesStructureId: 31489,
-        newsStructureId: 31493,
+        companyId: 1674701,
+        drugsStructureId: 1728835,
+        adviceStructureId: 1728833,
+        resourcesStructureId: 1728837,
+        newsStructureId: 1770002,
 
         // Stage
         // companyId: 1674701,
@@ -376,10 +376,12 @@ function startApp(isFreshDataDownload, dataMainMenu, dataResources, dataNews, da
     // else load the existing searchIndex from local storage.
     // Only working in >IE10
     if(!($('html').hasClass('lt-ie10') || $('html').hasClass('lt-ie9') || $('html').hasClass('lt-ie8'))) {
-        if (isFreshDataDownload) {
+        var searchIndex = storage.get('searchIndex');
+
+        if (isFreshDataDownload || !searchIndex || searchIndex.version !== lunr.version) {
             wwMangleSearchData(dataDrugs, dataAdvice);
         } else {
-            search.loadIndex(storage.get('searchIndex'));
+            search.loadIndex(searchIndex);
         }
     }
 
@@ -477,6 +479,50 @@ function registerEvents() {
     })
     .on("change", ".js-year-selector", function() {
         changeYear($('.js-year-selector').val());
+    });
+
+    var rememberedPositions = [];
+    $( "#details-advice, #details-drugs" ).bind("scroll",function(e) {
+
+        var appbarMenuTitleHeight = $('.appbar-menu-title').height() || 0;
+
+        var target = $(e.target);
+        var theads = target.find('table.fixed-head-enabled thead');
+
+        var targetPosition = target[0].scrollTop;
+
+        theads.each(function(i) {
+            var thead = $(theads[i]);
+            var table = thead.parents('table');
+            var top = thead.position().top;
+
+            if (top < appbarMenuTitleHeight && !table.hasClass('fixed-head')) {
+                rememberedPositions[i] = targetPosition;
+                var ths = thead.find('th');
+                ths.each(function (e) {
+                    var currentWidth = $(ths[e]).outerWidth();
+                    $(ths[e]).css('width', currentWidth);
+                });
+
+                var thead = table.find('thead');
+                $(thead[0]).css('width', $(thead[0]).outerWidth());
+                $(thead[0]).css('height', $(thead[0]).outerHeight());
+
+                table.addClass('fixed-head');
+            }
+        });
+
+        rememberedPositions.forEach(function (remembered, i) {
+            // var rememberedPosition = rememberedPositions[i];
+            if (remembered && targetPosition < remembered) {
+                // "Unfix" the relevant thead
+                var thead = $(theads[i]);
+                // thead.removeClass('fixed');
+                var table = thead.parents('table');
+                table.removeClass('fixed-head');
+                rememberedPositions[i] = null;
+            }
+        });
     });
 
 }
@@ -888,6 +934,27 @@ function registerHandlebarHelpers() {
         return new Handlebars.SafeString(ret);
     });
 
+    Handlebars.registerHelper('findLinkToArticle', function(context) {
+        var foundLinkToArticle = null;
+        var hasLinkToArticle = context.some(function (field) {
+            if (field.name) {
+                if (field.name === 'linktoarticle') {
+                    if (field.value.length > 0) {
+                        foundLinkToArticle = field.value;
+                        return true;
+                    }
+                }
+            }
+            return false;
+        });
+
+        if (hasLinkToArticle) {
+            return foundLinkToArticle;
+        } else {
+            return false;
+        }
+    });
+
     /**
      * Parse the text and do some replacing
      *
@@ -1151,8 +1218,32 @@ var search = {
             this.field('section', { boost: 10 });
             this.field('body');
             this.ref('id');
+
+            searchDataDrugs.forEach(function (item) {
+                this.add({
+                    id: 'drugs' + search._splitter + item.chapter + search._splitter + item.section,
+                    chapter: item.chapter,
+                    section: item.section,
+                    body: item.content
+                });
+            }, this);
+
+            searchDataAdvice.forEach(function (item) {
+                this.add({
+                    id: 'advice' + search._splitter + item.chapter + search._splitter + item.section,
+                    chapter: item.chapter,
+                    section: item.section,
+                    body: item.content
+                });
+            }, this);
         });
-        search.createIndex(searchDataDrugs, searchDataAdvice);
+
+        if (!window.isSignedIn) {
+            storage.set({
+                searchIndex: search.index
+            });
+        }
+
         $('.js-search-input-container').addClass('on');
     },
 
@@ -1213,16 +1304,18 @@ var search = {
 
             jqMainMenu.addClass('showing-searchresults');
 
-            var matches = search.index.search(searchFor).map(function (item) {
-                var fields = item.ref.split(search._splitter);
-                return {
-                    type: fields[0],
-                    link: fields[0] + '/' + makeUrlSafe(fields[1]) + '/' + makeUrlSafe(fields[2]),
-                    chapter: fields[1],
-                    section: fields[2]
-                };
+            var unicodeNormalized = lunr.unicodeNormalizer(searchFor);
+            var matches = search.index.search(unicodeNormalized + ' ' + '*' + unicodeNormalized + '*') // with or without asterisks
+                .map(function (item) {
+                    var fields = item.ref.split(search._splitter);
+                    return {
+                        type: fields[0],
+                        link: fields[0] + '/' + makeUrlSafe(fields[1]) + '/' + makeUrlSafe(fields[2]),
+                        chapter: fields[1],
+                        section: fields[2]
+                    };
 
-            });
+                });
 
             printTemplate(matches, "#search-results-template", '#search-results-placeholder');
 
