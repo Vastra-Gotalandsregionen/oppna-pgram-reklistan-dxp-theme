@@ -165,7 +165,7 @@ function registerHandlebarHelpers() {
 
       // Convert {{replaceable}} with icon
       text = text.replace(/\{\{replaceable\}\}/g, '<span class="replaceable">&#8860;</span>');
-      text = text.replace(/\{\{child\}\}/g, '<img src="/reklistan-theme/images/theme/child.png" class="child-icon">');
+      text = text.replace(/\{\{child\}\}/g, '<img src="/o/reklistan-dxp-theme/images/theme/child.png" class="child-icon">');
 
       return new Handlebars.SafeString(text);
   });
