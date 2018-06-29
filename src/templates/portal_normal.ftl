@@ -26,7 +26,7 @@
 	<script src="${themeDisplay.pathThemeRoot}/js/libs.min.js" type="text/javascript"></script>
     <script src="${themeDisplay.pathThemeRoot}/js/lunr.unicodeNormalizer.js?t=1" type="text/javascript"></script>
 	<#--<script src="${themeDisplay.pathThemeRoot}/js/main.js?browserId=${browserId}&languageId=${themeDisplay.languageId}&b=${liferayBuild}&t=${.now?datetime?iso_local}" type="text/javascript"></script>-->
-	<script src="${themeDisplay.pathThemeRoot}/js/main.js?browserId=${browserId}&languageId=${themeDisplay.languageId}&b=${liferayBuild}&t=128" type="text/javascript"></script>
+	<script src="${themeDisplay.pathThemeRoot}/js/main.js?browserId=${browserId}&languageId=${themeDisplay.languageId}&b=${liferayBuild}&t=129" type="text/javascript"></script>
 </head>
 
 <body class="${css_class}">
@@ -34,6 +34,8 @@
 <script>
 	window.isSignedIn = ${currentUserSignedIn?string};
     window.authToken = "${authToken}";
+
+    initApp();
 </script>
 
 <#-- HBS SEARCH RESULTS -->

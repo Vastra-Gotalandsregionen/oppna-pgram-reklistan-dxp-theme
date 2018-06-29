@@ -52,18 +52,6 @@ var rekData = {
     }
 };
 
-
-/* ************************************************************************* *\
- *
- * INITIALIZE
- *
-\* ************************************************************************* */
-
-$(function() {
-    initApp();
-});
-
-
 function clearCache() {
     storage
         .remove('searchIndex')
@@ -83,7 +71,7 @@ function clearCache() {
  * cached data from local storage
  */
 function initApp() {
-    if (isSignedIn) {
+    if (window.isSignedIn) {
         clearCache()
     }
 
