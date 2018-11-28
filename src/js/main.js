@@ -26,11 +26,11 @@ var rekData = {
     properties: {
 
         // Local Dev
-        companyId: 1674701,
-        drugsStructureId: 1728835,
-        adviceStructureId: 1728833,
-        resourcesStructureId: 1728837,
-        newsStructureId: 1770002,
+        // companyId: 1674701,
+        // drugsStructureId: 1728835,
+        // adviceStructureId: 1728833,
+        // resourcesStructureId: 1728837,
+        // newsStructureId: 1770002,
 
         // Stage
         // companyId: 1674701,
@@ -40,11 +40,11 @@ var rekData = {
         // newsStructureId: 1770002,
 
         // Live:
-        // companyId: 1712101,
-        // drugsStructureId: 1715233,
-        // adviceStructureId: 1715235,
-        // resourcesStructureId: 1715238,
-        // newsStructureId: 2080202,
+        companyId: 1712101,
+        drugsStructureId: 1715233,
+        adviceStructureId: 1715235,
+        resourcesStructureId: 1715238,
+        newsStructureId: 2080202,
 
         groupName: 'Guest',
         locale: 'sv_SE',
@@ -398,14 +398,16 @@ function initializeRoute() {
         '/:tab/:chapter': function(tab, chapter) {
             window.scrollTo(0, 0);
             showSubmenu(chapter, '', tab);
-            setBackButtonURL('#', navigationCounter++);
+            if (window.innerWidth >= 768) {
+                showFirstDetails(chapter, tab);
+            }
+            setBackButtonURL('#', navigationCounter++)
         },
         '/:tab/:chapter/:section': function(tab, chapter, section) {
             window.scrollTo(0, 0);
             showSubmenu(chapter, section, tab);
             showDetails(chapter, section, tab);
             setBackButtonURL('#/' + tab + '/' + chapter, navigationCounter++);
-
         },
         '/refresh': function() {
             clearCache();
@@ -431,7 +433,7 @@ function setBackButtonURL(url, counter) {
 
     if (counter > 0) {
         body.on("click", ".appbar-menu-back-wrapper", function (e) {
-            history.back();
+                history.back();
             navigationCounter -= 2; // Since it is incremented by the calling method we need to decrement by two.
             if (navigationCounter < 0) {
                 navigationCounter = 0;
@@ -843,6 +845,19 @@ function showDetails(chapter, details, tab) {
 
     $('.section-details-advice table').stacktable({minColCount:2}); // Make responsive tables
 
+}
+
+function showFirstDetails(chapter, tab) {
+    var filtered = getActiveTabData(tab).filter(function (entry) {
+        return (makeUrlSafe(entry.title, true) === chapter);
+    });
+
+    if (filtered.length === 1 ) {
+        var details = makeUrlSafe(filtered[0].fields[0].value, true);
+        showDetails(chapter, details, tab);
+    } else {
+        // TODO: Add error handling
+    }
 }
 
 
