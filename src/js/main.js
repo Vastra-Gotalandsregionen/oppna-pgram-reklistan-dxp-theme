@@ -113,28 +113,28 @@ function downloadResources(){
 
     var p_auth = window.authToken;
     var urls = {
-        drugs: '/api/jsonws/skinny.skinny/get-skinny-journal-articles/' +
+        drugs: '/api/jsonws/skinny-web.skinny/get-skinny-journal-articles/' +
         'company-id/' + rekData.properties.companyId +
         '/group-name/' + rekData.properties.groupName +
         '/ddm-structure-id/' + rekData.properties.drugsStructureId +
         '/locale/' + rekData.properties.locale +
         '?p_auth=' + p_auth,
 
-        advice: '/api/jsonws/skinny.skinny/get-skinny-journal-articles/' +
+        advice: '/api/jsonws/skinny-web.skinny/get-skinny-journal-articles/' +
         'company-id/' + rekData.properties.companyId +
         '/group-name/' + rekData.properties.groupName +
         '/ddm-structure-id/' + rekData.properties.adviceStructureId +
         '/locale/' + rekData.properties.locale +
         '?p_auth=' + p_auth,
 
-        resources: '/api/jsonws/skinny.skinny/get-skinny-journal-articles/' +
+        resources: '/api/jsonws/skinny-web.skinny/get-skinny-journal-articles/' +
         'company-id/' + rekData.properties.companyId +
         '/group-name/' + rekData.properties.groupName +
         '/ddm-structure-id/' + rekData.properties.resourcesStructureId +
         '/locale/' + rekData.properties.locale +
         '?p_auth=' + p_auth,
 
-        news: '/api/jsonws/skinny.skinny/get-skinny-journal-articles/' +
+        news: '/api/jsonws/skinny-web.skinny/get-skinny-journal-articles/' +
         'company-id/' + rekData.properties.companyId +
         '/group-name/' + rekData.properties.groupName +
         '/ddm-structure-id/' + rekData.properties.newsStructureId +
