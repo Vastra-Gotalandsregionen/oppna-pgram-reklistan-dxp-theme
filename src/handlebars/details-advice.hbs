@@ -26,7 +26,7 @@
                         <h2 class="advice-subheading">{{children.1.value}}</h2>
                     {{/if}}
                     {{#is children.0.value 'for-childs'}}
-                        <img src="/o/reklistan-dxp-theme/images/theme/child.png" class="child-icon">
+                        <img src="/o/reklistan-theme/images/theme/child.png" class="child-icon">
                     {{/is}}
                     {{{markdownify value}}}
                     {{#each children}}
@@ -34,11 +34,11 @@
                             {{#if value}}
                                 <div class="details-image">
                                     {{#is @root/isMobile true}}
-                                        <img src="{{{value}}}" alt="">
+                                        <img src="/documents/{{value.groupId}}/{{value.uuid}}" alt="">
                                     {{/is}}
                                     {{#isnt @root/isMobile true}}
-                                        <a href="{{{value}}}" target="_blank"><img src="{{{value}}}" alt=""></a>
-                                        <a href="{{{value}}}" target="_blank" class="fullscreen-link">Visa bild i fullskärm</a>
+                                        <a href="/documents/{{value.groupId}}/{{value.uuid}}" target="_blank"><img src="/documents/{{value.groupId}}/{{value.uuid}}" alt=""></a>
+                                        <a href="/documents/{{value.groupId}}/{{value.uuid}}" target="_blank" class="fullscreen-link">Visa bild i fullskärm</a>
                                     {{/isnt}}
                                 </div>
                             {{/if}}

@@ -49,5 +49,9 @@ function concatenateChildren(node, isFirst, tokens) {
 }
 
 function cleanHTML(str) {
+	if (str instanceof Object) {
+		return '';
+	}
+
 	return str.replace(/(<([^>]+)>)/ig, '');
 }

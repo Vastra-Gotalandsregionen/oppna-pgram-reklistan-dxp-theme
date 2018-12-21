@@ -48,7 +48,8 @@ var rekData = {
 
         groupName: 'Guest',
         locale: 'sv_SE',
-        secondsCacheData: 3600 //3600 == 1h.
+        secondsCacheData: 3600, //3600 == 1h.
+        rekVersion: 1
     }
 };
 
@@ -76,11 +77,12 @@ function initApp() {
     }
 
     var timestampLastDl = storage.get('rekDataLastSaved');
+    var rekVersion = storage.get('rekVersion');
     if (timestampLastDl === undefined) {
         downloadResources();
     } else {
         var timestampDiff = (new Date().getTime() - timestampLastDl) / 1000;
-        if (window.isSignedIn || timestampDiff > rekData.properties.secondsCacheData) {
+        if (window.isSignedIn || timestampDiff > rekData.properties.secondsCacheData || !rekVersion || rekVersion !== rekData.properties.rekVersion) {
             downloadResources();
         } else {
             rekData = storage.get([
@@ -141,9 +143,9 @@ function downloadResources(){
         '/locale/' + rekData.properties.locale +
         '?p_auth=' + p_auth,
 
-        hbsDrugs: '/o/reklistan-dxp-theme/handlebars/details-drugs.hbs',
-        hbsAdvice: '/o/reklistan-dxp-theme/handlebars/details-advice.hbs',
-        hbsResources: '/o/reklistan-dxp-theme/handlebars/resources.hbs'
+        hbsDrugs: '/o/reklistan-theme/handlebars/details-drugs.hbs',
+        hbsAdvice: '/o/reklistan-theme/handlebars/details-advice.hbs',
+        hbsResources: '/o/reklistan-theme/handlebars/resources.hbs'
     };
 
     $.when(
@@ -230,7 +232,8 @@ function mangleData(isFreshDownload, rekData) {
             hbsDrugs: rekData.hbsDrugs,
             hbsAdvice: rekData.hbsAdvice,
             hbsResources: rekData.hbsResources,
-            rekDataLastSaved: new Date().getTime()
+            rekDataLastSaved: new Date().getTime(),
+            rekVersion: rekData.properties.rekVersion
         });
     }
 
@@ -827,6 +830,17 @@ function showDetails(chapter, details, tab) {
         hbsTemplate = rekData.hbsAdvice;
     }
 
+    // The image values come as json strings. We need to "objectify" them.
+    filtered.fields.forEach(function(field) {
+        field.children.forEach(function (bodyChild) {
+            bodyChild.children.filter(function (child) {
+                return child.name === 'image' && child.value && child.value.length > 0;
+            }).forEach(function (child) {
+                child.value = JSON.parse(child.value);
+            });
+        })
+    });
+
 	printTemplate(filtered, '', '#details-' + tab + '-placeholder', hbsTemplate);
 
     // Remove active classes for big screen
@@ -929,7 +943,7 @@ function wwMangleSearchData(dataDrugs, dataAdvice){
     if(!window.Worker) {
         return;
     }
-    var worker = new Worker("/o/reklistan-dxp-theme/js/webworker-searchdata.js");
+    var worker = new Worker("/o/reklistan-theme/js/webworker-searchdata.js");
     worker.postMessage(JSON.stringify({
         dataDrugs: dataDrugs,
         dataAdvice: dataAdvice
@@ -995,7 +1009,7 @@ function registerHandlebarHelpers() {
 
         // Convert {{replaceable}} with icon
         text = text.replace(/\{\{replaceable\}\}/g, '<span class="replaceable">&#8860;</span>');
-        text = text.replace(/\{\{child\}\}/g, '<img src="/o/reklistan-dxp-theme/images/theme/child.png" class="child-icon">');
+        text = text.replace(/\{\{child\}\}/g, '<img src="/o/reklistan-theme/images/theme/child.png" class="child-icon">');
 
         // Make sure external links open in new tab/window
         text = text.replace(/href=[\"\'](http[s]?\:\/\/[^\"\']+)[\"\']/gi, 'href="$1" target="_blank"');
