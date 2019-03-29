@@ -297,7 +297,7 @@ function mangleData(isFreshDownload, rekData) {
             fieldOut[field.name] = field.value;
         });
 
-        if (fieldOut.medium.indexOf('both') > 0 || fieldOut.medium.indexOf('web') > 0) { // Only include news targeted to mobile.
+        if (fieldOut.medium.indexOf('both') > -1 || fieldOut.medium.indexOf('web') > -1) { // Only include news targeted to mobile.
             return fieldOut;
         } else {
             return undefined;
@@ -334,7 +334,7 @@ function mangleData(isFreshDownload, rekData) {
             fieldOut[field.name] = field.value;
         });
 
-        if (fieldOut.medium.indexOf('both') > 0 || fieldOut.medium.indexOf('web') > 0) { // Only include news targeted to mobile.
+        if (fieldOut.medium.indexOf('both') > -1 || fieldOut.medium.indexOf('web') > -1) { // Only include news targeted to mobile.
             return fieldOut;
         } else {
             return undefined;
