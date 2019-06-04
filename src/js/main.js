@@ -82,22 +82,26 @@ function initApp() {
         downloadResources();
     } else {
         var timestampDiff = (new Date().getTime() - timestampLastDl) / 1000;
-        if (window.isSignedIn || timestampDiff > rekData.properties.secondsCacheData || !rekVersion || rekVersion !== rekData.properties.rekVersion) {
+        if (navigator.onLine && (window.isSignedIn || timestampDiff > rekData.properties.secondsCacheData || !rekVersion || rekVersion !== rekData.properties.rekVersion)) {
             downloadResources();
         } else {
-            rekData = storage.get([
-                'dataDrugs',
-                'dataAdvice',
-                'dataResources',
-                //'mainMenuData',
-                'dataNews',
-                'hbsDrugs',
-                'hbsAdvice',
-                'hbsResources'
-            ]);
-            mangleData(false, rekData);
+            readStoredData();
         }
     }
+}
+
+function readStoredData() {
+    rekData = storage.get([
+        'dataDrugs',
+        'dataAdvice',
+        'dataResources',
+        //'mainMenuData',
+        'dataNews',
+        'hbsDrugs',
+        'hbsAdvice',
+        'hbsResources'
+    ]);
+    mangleData(false, rekData);
 }
 
 var temp;
@@ -183,6 +187,7 @@ function downloadResources(){
         // TODO Better error msg.
         // TODO Put this back to somewhere good. Also add timeout
         //$('#main-menu-placeholder').html('<div class="error-box"><h1>Något gick snett</h1><p>Tyvärr kunde datan inte hämtas från servern. <b>Försök ladda om sidan.</b></p><p>Fungerar det fortfarande inte? Skicka ett epost till Christer Printz <a href="mailto:christer.printz@vgregion.se">christer.printz@vgregion.se</a></p></div>');
+        readStoredData();
     });
 }
 

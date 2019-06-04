@@ -9,10 +9,8 @@
 <#assign txtFeedbackURL="#/resource/Tyck_till_om_digitala_REKlistan" />
 
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7 ${root_css_class}" dir="<@liferay.language key="lang.dir" />" lang="${w3c_language_id}"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8 ${root_css_class}" dir="<@liferay.language key="lang.dir" />" lang="${w3c_language_id}"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9 ${root_css_class}" dir="<@liferay.language key="lang.dir" />" lang="${w3c_language_id}"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js ${root_css_class}" dir="<@liferay.language key="lang.dir" />" lang="${w3c_language_id}"> <!--<![endif]-->
+
+<html manifest="/o/reklistan-theme/resources/reklistan.appcache">
 
 <head>
 	<title>${the_title}</title>
@@ -22,8 +20,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 	<link href="${themeDisplay.pathThemeRoot}/images/favicon.ico" rel="Shortcut Icon">
 	<link href='https://fonts.googleapis.com/css?family=Roboto:500,900italic,900,400italic,100,700italic,300,700,500italic,100italic,300italic,400' rel='stylesheet' type='text/css'>
-    <link class="lfr-css-file" href="${themeDisplay.pathThemeRoot}/css/main.css?browserId=${browserId}&themeId=${themeDisplay.themeId}&languageId=${themeDisplay.languageId}&b=${liferayBuild}&t=${.now?datetime?iso_local}" rel="stylesheet" type="text/css">
-	<script src="${themeDisplay.pathThemeRoot}/js/libs.min.js" type="text/javascript"></script>
+    <link class="lfr-css-file" href="${themeDisplay.pathThemeRoot}/css/main.css?browserId=${browserId}&themeId=${themeDisplay.themeId}&languageId=${themeDisplay.languageId}&b=${liferayBuild}&t=1" rel="stylesheet" type="text/css">
+	<script src="${themeDisplay.pathThemeRoot}/js/libs.min.js?t=1" type="text/javascript"></script>
     <script src="${themeDisplay.pathThemeRoot}/js/lunr.unicodeNormalizer.js?t=1" type="text/javascript"></script>
 	<#--<script src="${themeDisplay.pathThemeRoot}/js/main.js?browserId=${browserId}&languageId=${themeDisplay.languageId}&b=${liferayBuild}&t=${.now?datetime?iso_local}" type="text/javascript"></script>-->
 </head>
@@ -310,7 +308,7 @@
 	</div>
 </div>
 
-<script src="${themeDisplay.pathThemeRoot}/js/main.js?browserId=${browserId}&languageId=${themeDisplay.languageId}&b=${liferayBuild}&t=144" type="text/javascript"></script>
+<script src="${themeDisplay.pathThemeRoot}/js/main.js?browserId=${browserId}&languageId=${themeDisplay.languageId}&b=${liferayBuild}&t=146" type="text/javascript"></script>
 
 <script>
     initApp();
