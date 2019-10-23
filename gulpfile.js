@@ -1,9 +1,10 @@
 'use strict';
 
 var gulp = require('gulp');
+var liferayThemeTasks = require('liferay-theme-tasks');
+
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
-var liferayThemeTasks = require('liferay-theme-tasks');
 
 var jsFiles = [
 	'./src/lib/respond/dest/respond.min.js',
