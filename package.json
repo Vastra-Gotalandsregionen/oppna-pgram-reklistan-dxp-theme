@@ -14,10 +14,10 @@
     "fontAwesome": false
   },
   "devDependencies": {
-    "gulp": "3.9.1",
-    "liferay-theme-tasks": "^9.4.0",
-    "liferay-frontend-theme-unstyled": "^2.2.27",
+    "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",
-    "gulp-uglify": "^3.0.0"
+    "gulp-uglify": "^3.0.0",
+    "liferay-frontend-theme-unstyled": "^2.2.31",
+    "liferay-theme-tasks": "^10.0.2"
   }
 }

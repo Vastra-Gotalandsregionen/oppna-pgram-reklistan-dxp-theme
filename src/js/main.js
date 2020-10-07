@@ -313,10 +313,21 @@ function mangleData(isFreshDownload, rekData) {
     workingResources = cleanArray(workingResources);
 
     rekData.dataResources = workingResources.sort(function (a, b) {
-        if (a.sortOrder.value > b.sortOrder.value) {
+        var thiz = +a.sortOrder;
+        var that = +b.sortOrder;
+
+        if (!thiz || thiz === 0) {
+            thiz = 9999;
+        }
+
+        if (!that || that === 0) {
+            that = 9999;
+        }
+
+        if (thiz > that) {
             return 1;
         }
-        if (a.sortOrder.value < b.sortOrder.value) {
+        if (thiz < that) {
             return -1;
         }
         return 0;
