@@ -605,6 +605,11 @@ function createMenuesAndBigStartPage(mainMenuData, dataResources, dataNews, data
         $('body').addClass(dataYears.present === dataYears.show ? 'adminmode-present-year' : 'adminmode-other-year');
         printTemplate(dataYears, "#admin-bar-template", '#admin-bar-placeholder');
     }
+
+    if (dataYears.show) {
+        $('#revisionPlaceholder')[0].innerHTML = dataYears.show;
+    }
+
     printTemplate(data, "#main-menu-template", '#main-menu-placeholder');
     printTemplate(data, "#filler-template", '#details-filler-placeholder');
     printTemplate(data, "#fly-menu-template", '#fly-menu-placeholder');

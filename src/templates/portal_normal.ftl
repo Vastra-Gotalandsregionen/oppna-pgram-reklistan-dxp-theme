@@ -265,7 +265,7 @@
 		<div class="appbar">
 			<div class="appbar-menu-title-wrapper">
                 <div class="appbar-menu-title">
-                    <a href="#">REK<span class="thin">listan</span></a>
+                    <a href="#">REK<span class="thin">listan <span id="revisionPlaceholder"></span></span></a>
                     <div class="appbar-menu-sub-title">Läkemedelskommittén i Västra Götalandsregionen</div>
                 </div>
             </div>
@@ -308,7 +308,7 @@
 	</div>
 </div>
 
-<script src="${themeDisplay.pathThemeRoot}/js/main.js?browserId=${browserId}&languageId=${themeDisplay.languageId}&b=${liferayBuild}&t=152" type="text/javascript"></script>
+<script src="${themeDisplay.pathThemeRoot}/js/main.js?browserId=${browserId}&languageId=${themeDisplay.languageId}&b=${liferayBuild}&t=154" type="text/javascript"></script>
 
 <script>
     initApp();
