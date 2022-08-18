@@ -388,8 +388,10 @@ function startApp(isFreshDataDownload, dataMainMenu, dataResources, dataNews, da
     registerHandlebarHelpers();
     Swag.registerHelpers(Handlebars);
     registerEvents();
-    initializeRoute();
+    initializeRoute(dataMainMenu, dataNews, dataResources);
     createMenuesAndBigStartPage(dataMainMenu, dataResources, dataNews, dataYears);
+
+    initializeToggleSubmenuButtons(dataMainMenu, dataNews, dataResources);
 
     // Initialize FastClick to make it snappier on mobile browsers.
     FastClick.attach(document.body);
@@ -416,7 +418,7 @@ function startApp(isFreshDataDownload, dataMainMenu, dataResources, dataNews, da
 
 var navigationCounter = 0;
 
-function initializeRoute() {
+function initializeRoute(dataMainMenu, dataNews, dataResources) {
 
     routie({
         '/resource/:newsitem': function(resourceItem) {
@@ -431,15 +433,13 @@ function initializeRoute() {
         },
         '/:tab/:chapter': function(tab, chapter) {
             window.scrollTo(0, 0);
-            showSubmenu(chapter, '', tab);
-            if (window.innerWidth >= 768) {
-                showFirstDetails(chapter, tab);
-            }
+            gotoChapterAndSection(chapter, '', tab, dataMainMenu, dataNews, dataResources);
+            showFirstDetails(chapter, tab);
             setBackButtonURL('#', navigationCounter++)
         },
         '/:tab/:chapter/:section': function(tab, chapter, section) {
             window.scrollTo(0, 0);
-            showSubmenu(chapter, section, tab);
+            gotoChapterAndSection(chapter, section, tab, dataMainMenu, dataNews, dataResources);
             showDetails(chapter, section, tab);
             setBackButtonURL('#/' + tab + '/' + chapter, navigationCounter++);
         },
@@ -476,15 +476,9 @@ function setBackButtonURL(url, counter) {
         });
     }
 
-    if (navObj.isMobileView) {
-        $('.js-navigation-button')
-            .attr("href", url)
-            .addClass('on');
-    } else {
-        $('.js-navigation-button')
+    $('.js-navigation-button')
             .attr("href", '#')
             .addClass('on');
-    }
 }
 
 /* ************************************************************************* *\
@@ -659,13 +653,50 @@ function showGeneric(type, clickedItem) {
     $('.section-details-generic table').stacktable({minColCount:2}); // Make responsive tables
 }
 
+function initializeToggleSubmenuButtons(dataMainMenu, dataNews, dataResources) {
+    $('.toggle-submenu-button').click(function (event) {
+        var chapter = event.target.dataset.chapter;
+        var tab = event.target.dataset.tab;
+
+        var filteredArr = getActiveTabData(tab).filter(function (entry) {
+            return (makeUrlSafe(entry.title, true) === chapter);
+        });
+        var filtered = filteredArr[0];
+
+        // Add type (drugs or advice) to object, to be able to use it in Handlebars
+        // and create links with it.
+        filtered.tab = tab;
+
+        var foundArea = dataMainMenu.find(function(item) {
+            return makeUrlSafe(item._title) === chapter;
+        });
+
+        if (foundArea.subChapters) {
+            // Already expanded. Then minimize.
+            foundArea.subChapters = undefined;
+        } else {
+            foundArea.subChapters = filtered;
+        }
+
+        var data = {
+            areas: dataMainMenu,
+            news: dataNews,
+            resources: dataResources
+        };
+        printTemplate(data, "#main-menu-template", '#main-menu-placeholder');
+
+        $('.js-search-input-container').addClass('on');
+
+        initializeToggleSubmenuButtons(dataMainMenu, dataNews, dataResources);
+    });
+}
 
 /* ************************************************************************* *\
  *
  * SHOW SUBMENU
  *
 \* ************************************************************************* */
-function showSubmenu(chapter, section, tab) {
+function gotoChapterAndSection(chapter, section, tab, dataMainMenu, dataNews, dataResources) {
     // TODO - Add error handling to see if chapter exist
 
     backToSubmenu();
@@ -674,6 +705,8 @@ function showSubmenu(chapter, section, tab) {
     var jqMainMenu = $('#mainmenu');
     var jqSubmenu = $('#submenu-' + tab);
 
+    jqMainMenu.removeClass('showing-searchresults');
+
     // Filter big fat data array to only show current chapter and print template
     var filteredArr = getActiveTabData(tab).filter(function (entry) {
         return (makeUrlSafe(entry.title, true) === chapter);
@@ -681,7 +714,7 @@ function showSubmenu(chapter, section, tab) {
     var filtered = filteredArr[0];
 
     // Set Current View
-    setCurrentView('submenu', chapter, '');
+    setCurrentView('details', chapter, '');
 
     // Add type (drugs or advice) to object, to be able to use it in Handlebars
     // and create links with it.
@@ -717,23 +750,25 @@ function showSubmenu(chapter, section, tab) {
         }
     }
 
-    printTemplate(filtered, "#submenu-template", '#submenu-' + tab + '-placeholder');
+    var foundArea = dataMainMenu.find(function(item) {
+        console.log(item._title);
+        return makeUrlSafe(item._title) === chapter;
+    });
 
-    // Remove active classes for big screen
-    if (tab === 'drugs') {
-        $('#submenu-advice')
-            .removeClass('active')
-            .removeClass('active-submenu');
-    } else {
-        $('#submenu-drugs')
-            .removeClass('active')
-            .removeClass('active-submenu');
-    }
+    foundArea.subChapters = filtered;
+
+    var data = {
+        areas: dataMainMenu,
+        news: dataNews,
+        resources: dataResources
+    };
+    printTemplate(data, "#main-menu-template", '#main-menu-placeholder');
+    $('.js-search-input-container').addClass('on');
+
+    initializeToggleSubmenuButtons(dataMainMenu, dataNews, dataResources);
 
     // Flip Active Classes
     jqMainMenu.removeClass('active');
-    jqSubmenu.addClass('active');
-    jqSubmenu.addClass('active-submenu');
 
     // Remove all previous highlights
     $('.js-submenu-item').removeClass('active-menu-item');

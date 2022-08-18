@@ -22,6 +22,15 @@
     }
 }
 
+// Always show #mainmenu when at least medium screen width.
+.showing-details {
+    @include medium {
+        #mainmenu {
+            display: block;
+        }
+    }
+}
+
 .showing-mainmenu {
     #submenu-drugs,
     #submenu-advice,

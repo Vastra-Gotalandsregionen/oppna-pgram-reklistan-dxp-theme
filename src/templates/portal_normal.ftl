@@ -20,7 +20,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 	<link href="${themeDisplay.pathThemeRoot}/images/favicon.ico" rel="Shortcut Icon">
 	<link href='https://fonts.googleapis.com/css?family=Roboto:500,900italic,900,400italic,100,700italic,300,700,500italic,100italic,300italic,400' rel='stylesheet' type='text/css'>
-    <link class="lfr-css-file" href="${themeDisplay.pathThemeRoot}/css/main.css?browserId=${browserId}&themeId=${themeDisplay.themeId}&languageId=${themeDisplay.languageId}&b=${liferayBuild}&t=1" rel="stylesheet" type="text/css">
+    <link class="lfr-css-file" href="${themeDisplay.pathThemeRoot}/css/main.css?browserId=${browserId}&themeId=${themeDisplay.themeId}&languageId=${themeDisplay.languageId}xx&b=${liferayBuild}&t=1" rel="stylesheet" type="text/css">
 	<script src="${themeDisplay.pathThemeRoot}/js/libs.min.js?t=1" type="text/javascript"></script>
     <script src="${themeDisplay.pathThemeRoot}/js/lunr.unicodeNormalizer.js?t=1" type="text/javascript"></script>
 	<#--<script src="${themeDisplay.pathThemeRoot}/js/main.js?browserId=${browserId}&languageId=${themeDisplay.languageId}&b=${liferayBuild}&t=${.now?datetime?iso_local}" type="text/javascript"></script>-->
@@ -113,43 +113,41 @@
 			</div>
 		</div>
 		{{#each areas}}
-			<a href="#/{{#isnt hasDrugs true}}advice{{/isnt}}{{#is hasDrugs true}}drugs{{/is}}/{{urlencode _title}}" class="list-item js-mainmenu-item item-{{@index}}">
-				<div class="list-item-text">
-					{{_title}}
+			<div>
+				<div style="display: flex; align-items: center;">
+					<a style="flex-grow: 1" href="#/{{#isnt hasDrugs true}}advice{{/isnt}}{{#is hasDrugs true}}drugs{{/is}}/{{urlencode _title}}" class="list-item js-mainmenu-item item-{{@index}}">
+						<div class="list-item-text">
+							{{_title}}
+						</div>
+					</a>
+					<button class="toggle-submenu-button" style="
+						flex-grow: 0;
+						height: 32px;
+						width: 32px;
+						margin-right: 12px;"
+							 data-chapter="{{urlencode _title}}" data-tab="{{#isnt hasDrugs true}}advice{{/isnt}}{{#is hasDrugs true}}drugs{{/is}}">+</button>
 				</div>
-			</a>
+				<#-- Submenu -->
+				<div>
+					{{#each subChapters.fields}}
+						{{#if (findLinkToArticle children) }}
+						<a href="{{findLinkToArticle children}}" class="list-item submenu-item item-{{@index}} js-submenu-item">
+						{{else}}
+						<a href="#/{{../../subChapters.tab}}/{{urlencode ../../subChapters.title}}/{{urlencode value}}" class="list-item submenu-item item-{{@index}} js-submenu-item">
+						{{/if}}
+						{{#is children.0.children.0.value 'physical-exercise'}}
+							<div class="list-item-icon">
+								<i class="flaticon-man460 icon-15x"></i>
+							</div>
+						{{/is}}
+							<div style="font-size: .7em" class="list-item-text submenu-item-text">{{value}}</div>
+						</a>
+					{{/each}}
+				</div>
+			</div>
 		{{/each}}
 	</div>
 </script>
-
-
-<#-- HBS SUBMENU -->
-<script id="submenu-template" type="text/x-handlebars-template">
-	<div class="view-topper">
-		<div class="second-bar">
-			<h2 class="second-bar-title">{{title}}</h2>
-		</div>
-		<div class="js-submenu-tabs tabs">
-			<a href="#/drugs/{{urlencode title}}{{#if sameSectionOnOtherTab}}/{{sameSectionOnOtherTab}}{{/if}}" class="tab js-tab-item js-tab-item-drugs {{tabClassDrugs}}">${txtDrugs}</a>
-			<a href="#/advice/{{urlencode title}}{{#if sameSectionOnOtherTab}}/{{sameSectionOnOtherTab}}{{/if}}" class="tab js-tab-item js-tab-item-advice {{tabClassAdvice}}">${txtAdvice}</a>
-		</div>
-	</div>
-	{{#each fields}}
-    	{{#if (findLinkToArticle children) }}
-    		<a href="{{findLinkToArticle children}}" class="list-item submenu-item item-{{@index}} js-submenu-item">
-        {{else}}
-        	<a href="#/{{@root/tab}}/{{urlencode @root/title}}/{{urlencode value}}" class="list-item submenu-item item-{{@index}} js-submenu-item">
-		{{/if}}
-			{{#is children.0.children.0.value 'physical-exercise'}}
-				<div class="list-item-icon">
-					<i class="flaticon-man460 icon-15x"></i>
-				</div>
-			{{/is}}
-			<div class="list-item-text submenu-item-text">{{value}}</div>
-		</a>
-	{{/each}}
-</script>
-
 
 <#-- HBS NEWS -->
 <script id="news-template" type="text/x-handlebars-template">
@@ -308,7 +306,7 @@
 	</div>
 </div>
 
-<script src="${themeDisplay.pathThemeRoot}/js/main.js?browserId=${browserId}&languageId=${themeDisplay.languageId}&b=${liferayBuild}&t=154" type="text/javascript"></script>
+<script src="${themeDisplay.pathThemeRoot}/js/main.js?browserId=${browserId}&languageId=${themeDisplay.languageId}&b=${liferayBuild}&t=171" type="text/javascript"></script>
 
 <script>
     initApp();
