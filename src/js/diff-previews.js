@@ -34,28 +34,28 @@
       // Show and hide the previews
       $('.toggle-show-published').click(function (event) {
         event.preventDefault();
-        $('.preview-box-draft').addClass('hide-me');
+        $('.preview-box-draft').addClass('hide');
       });
 
       $('.toggle-show-draft').click(function (event) {
           event.preventDefault();
-          $('.preview-box-draft').removeClass('hide-me');
+          $('.preview-box-draft').removeClass('hide');
       });
 
       $('.checkbox-show-preview-published-draft').change(function () {
           if (this.checked) {
-              $('.preview-box-draft').removeClass('hide-me');
+              $('.preview-box-draft').removeClass('hide');
           } else {
-              $('.preview-box-draft').addClass('hide-me');
+              $('.preview-box-draft').addClass('hide');
           }
           setSinglePreviewClass();
       });
 
       $('.checkbox-show-preview-diff').change(function () {
           if (this.checked) {
-              $('.preview-box-diff').removeClass('hide-me');
+              $('.preview-box-diff').removeClass('hide');
           } else {
-              $('.preview-box-diff').addClass('hide-me');
+              $('.preview-box-diff').addClass('hide');
           }
           setSinglePreviewClass();
       });

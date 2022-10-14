@@ -5,6 +5,9 @@
   "keywords": [
     "liferay-theme"
   ],
+  "scripts": {
+    "build": "gulp build"
+  },
   "liferayTheme": {
     "baseTheme": "unstyled",
     "screenshot": "",
