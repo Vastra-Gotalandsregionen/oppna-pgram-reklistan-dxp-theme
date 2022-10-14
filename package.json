@@ -21,6 +21,6 @@
     "gulp-concat": "^2.6.1",
     "gulp-uglify": "^3.0.0",
     "liferay-frontend-theme-unstyled": "^2.2.31",
-    "liferay-theme-tasks": "^10.0.2"
+    "liferay-theme-tasks": "^11.4.0"
   }
 }
