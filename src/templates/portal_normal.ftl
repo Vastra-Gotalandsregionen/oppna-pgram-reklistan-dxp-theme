@@ -122,7 +122,7 @@
 					<li class="{{#if subChapters}}open{{/if}} {{get-chapter-selected-css-class this}}">
 						<div class="toggle-menu-item-main">
 							<a href="#/{{#isnt hasDrugs true}}advice{{/isnt}}{{#is hasDrugs true}}drugs{{/is}}/{{urlencode _title}}" class="js-mainmenu-item item-{{@index}}">
-								<span class="material-icons material-icons-outlined">arrow_right</span>
+								<span class="material-icons material-icons-outlined">chevron_right</span>
 								<span>{{_title}}</span>
 							</a>
 							<button class="toggle-submenu-button"data-chapter="{{urlencode _title}}" data-tab="{{#isnt hasDrugs true}}advice{{/isnt}}{{#is hasDrugs true}}drugs{{/is}}">
@@ -143,7 +143,7 @@
 									{{else}}
 										<a href="#/{{../../subChapters.tab}}/{{urlencode ../../subChapters.title}}/{{urlencode value}}" class="submenu-item item-{{@index}} js-submenu-item">
 									{{/if}}
-										<span class="material-icons material-icons-outlined">arrow_right</span>
+										<span class="material-icons material-icons-outlined">chevron_right</span>
 										<span>{{value}}</span>
 									</a>
 								</li>
@@ -313,7 +313,7 @@
 	</div>
 </div>
 
-<script src="${themeDisplay.pathThemeRoot}/js/main.js?browserId=${browserId}&languageId=${themeDisplay.languageId}&b=${liferayBuild}&t=171" type="text/javascript"></script>
+<script src="${themeDisplay.pathThemeRoot}/js/main.js?browserId=${browserId}&languageId=${themeDisplay.languageId}&b=${liferayBuild}&t=172" type="text/javascript"></script>
 
 <script>
     initApp();
