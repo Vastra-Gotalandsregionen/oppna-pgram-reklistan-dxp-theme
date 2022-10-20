@@ -32,12 +32,26 @@ var rekData = {
         // resourcesStructureId: 1728837,
         // newsStructureId: 1770002,
 
+        // EA local:
+        // companyId: 20101,
+        // drugsStructureId: 36168,
+        // adviceStructureId: 36172,
+        // resourcesStructureId: 36176,
+        // newsStructureId: 36180,
+
+        // Test
+        // companyId: 1712101,
+        // drugsStructureId: 1715233,
+        // adviceStructureId: 1715235,
+        // resourcesStructureId: 1715238,
+        // newsStructureId: 2080202,
+
         // Stage
-        // companyId: 1674701,
-        // drugsStructureId: 1728835,
-        // adviceStructureId: 1728833,
-        // resourcesStructureId: 1728837,
-        // newsStructureId: 1770002,
+        // companyId: 1712101,
+        // drugsStructureId: 1715233,
+        // adviceStructureId: 1715235,
+        // resourcesStructureId: 1715238,
+        // newsStructureId: 2080202,
 
         // Live:
         companyId: 1712101,
@@ -388,10 +402,7 @@ function startApp(isFreshDataDownload, dataMainMenu, dataResources, dataNews, da
     registerHandlebarHelpers();
     Swag.registerHelpers(Handlebars);
     registerEvents();
-    initializeRoute(dataMainMenu, dataNews, dataResources);
-    createMenuesAndBigStartPage(dataMainMenu, dataResources, dataNews, dataYears);
-
-    initializeToggleSubmenuButtons(dataMainMenu, dataNews, dataResources);
+    initializeRoute(dataMainMenu, dataNews, dataResources, dataYears);
 
     // Initialize FastClick to make it snappier on mobile browsers.
     FastClick.attach(document.body);
@@ -418,30 +429,38 @@ function startApp(isFreshDataDownload, dataMainMenu, dataResources, dataNews, da
 
 var navigationCounter = 0;
 
-function initializeRoute(dataMainMenu, dataNews, dataResources) {
-
+function initializeRoute(dataMainMenu, dataNews, dataResources, dataYears) {
     routie({
         '/resource/:newsitem': function(resourceItem) {
             window.scrollTo(0, 0);
             showGeneric('resource', resourceItem);
             setBackButtonURL('#', navigationCounter++);
+            createMenuesAndBigStartPage(dataMainMenu, dataResources, dataNews, dataYears);
+            initializeToggleSubmenuButtons(dataMainMenu, dataNews, dataResources);
         },
         '/news/:newsitem': function(newsItem) {
             window.scrollTo(0, 0);
             showGeneric('news', newsItem);
             setBackButtonURL('#', navigationCounter++);
+            createMenuesAndBigStartPage(dataMainMenu, dataResources, dataNews, dataYears);
+            initializeToggleSubmenuButtons(dataMainMenu, dataNews, dataResources);
         },
         '/:tab/:chapter': function(tab, chapter) {
             window.scrollTo(0, 0);
             gotoChapterAndSection(chapter, '', tab, dataMainMenu, dataNews, dataResources);
             showFirstDetails(chapter, tab);
             setBackButtonURL('#', navigationCounter++)
+            createMenuesAndBigStartPage(dataMainMenu, dataResources, dataNews, dataYears);
+            initializeToggleSubmenuButtons(dataMainMenu, dataNews, dataResources);
+
         },
         '/:tab/:chapter/:section': function(tab, chapter, section) {
             window.scrollTo(0, 0);
             gotoChapterAndSection(chapter, section, tab, dataMainMenu, dataNews, dataResources);
             showDetails(chapter, section, tab);
             setBackButtonURL('#/' + tab + '/' + chapter, navigationCounter++);
+            createMenuesAndBigStartPage(dataMainMenu, dataResources, dataNews, dataYears);
+            initializeToggleSubmenuButtons(dataMainMenu, dataNews, dataResources);
         },
         '/refresh': function() {
             clearCache();
@@ -451,6 +470,8 @@ function initializeRoute(dataMainMenu, dataNews, dataResources) {
         '*': function () {
             window.scrollTo(0, 0);
             backToMainMenu();
+            createMenuesAndBigStartPage(dataMainMenu, dataResources, dataNews, dataYears);
+            initializeToggleSubmenuButtons(dataMainMenu, dataNews, dataResources);
         }
     });
 }
@@ -654,9 +675,13 @@ function showGeneric(type, clickedItem) {
 }
 
 function initializeToggleSubmenuButtons(dataMainMenu, dataNews, dataResources) {
-    $('.toggle-submenu-button').click(function (event) {
-        var chapter = event.target.dataset.chapter;
-        var tab = event.target.dataset.tab;
+    var toggleButton = $('.toggle-submenu-button');
+
+    toggleButton.unbind('click');
+
+    toggleButton.click(function (event) {
+        var chapter = event.currentTarget.dataset.chapter;
+        var tab = event.currentTarget.dataset.tab;
 
         var filteredArr = getActiveTabData(tab).filter(function (entry) {
             return (makeUrlSafe(entry.title, true) === chapter);
@@ -751,7 +776,6 @@ function gotoChapterAndSection(chapter, section, tab, dataMainMenu, dataNews, da
     }
 
     var foundArea = dataMainMenu.find(function(item) {
-        console.log(item._title);
         return makeUrlSafe(item._title) === chapter;
     });
 
@@ -1087,6 +1111,31 @@ function registerHandlebarHelpers() {
 
         return new Handlebars.SafeString(text);
     });
+
+    Handlebars.registerHelper('get-chapter-selected-css-class', function(context) {
+        var urlSafeTitle = makeUrlSafe(context._title, true);
+
+        if(urlSafeTitle === navObj.currentChapter) {
+            if(navObj.currentDetails === '') {
+                return 'selected current';
+            } else {
+                return 'selected';
+            }
+        } else {
+            return '';
+        }
+    });
+
+    Handlebars.registerHelper('get-details-selected-css-class', function(context) {
+        var urlSafeTitle = makeUrlSafe(context.value, true);
+
+        if(urlSafeTitle === navObj.currentDetails) {
+            return 'current';
+        } else {
+            return '';
+        }
+    });
+
 }
 
 /**

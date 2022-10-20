@@ -23,6 +23,7 @@ body {
 @import 'partials/utilities-material/cards';
 @import 'partials/utilities-material/shadows';
 /* @import 'partials/utilities-material/material-design-iconic-font'; */
+@import 'partials/utilities/material-icons';
 
 
 @import 'partials/atoms/body';
@@ -38,6 +39,7 @@ body {
 @import 'partials/molecules/adminbar';
 @import 'partials/molecules/recommended-drugs';
 @import 'partials/molecules/meta-navigation';
+@import 'src/css/partials/molecules/toggle-menu';
 @import 'partials/molecules/fly-menu';
 @import 'partials/molecules/main-menu-news';
 @import 'partials/molecules/search';

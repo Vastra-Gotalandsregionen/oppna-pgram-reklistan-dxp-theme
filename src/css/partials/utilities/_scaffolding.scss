@@ -113,6 +113,14 @@
         border-right: 1px solid $color-gray-temp4-alpha;
     }
 
+    // Change 2022-10-19.
+    // These sub-menus should never be displayed
+    #submenu-drugs,
+    #submenu-advice {
+        display: none;
+    }
+
+
     #details-filler,
     #details-drugs,
     #details-advice,

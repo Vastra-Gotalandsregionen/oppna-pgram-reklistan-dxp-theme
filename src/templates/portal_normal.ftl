@@ -20,7 +20,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 	<link href="${themeDisplay.pathThemeRoot}/images/favicon.ico" rel="Shortcut Icon">
 	<link href='https://fonts.googleapis.com/css?family=Roboto:500,900italic,900,400italic,100,700italic,300,700,500italic,100italic,300italic,400' rel='stylesheet' type='text/css'>
-    <link class="lfr-css-file" href="${themeDisplay.pathThemeRoot}/css/main.css?browserId=${browserId}&themeId=${themeDisplay.themeId}&languageId=${themeDisplay.languageId}xx&b=${liferayBuild}&t=1" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+	<#--
+    <link class="lfr-css-file" href="${themeDisplay.pathThemeRoot}/css/main.css?browserId=${browserId}&themeId=${themeDisplay.themeId}&languageId=${themeDisplay.languageId}xx&b=${liferayBuild}&t=2" rel="stylesheet" type="text/css">
+    -->
+	<link class="lfr-css-file" data-senna-track="temporary" href="${css_main_file}" rel="stylesheet" type="text/css" />
 	<script src="${themeDisplay.pathThemeRoot}/js/libs.min.js?t=1" type="text/javascript"></script>
     <script src="${themeDisplay.pathThemeRoot}/js/lunr.unicodeNormalizer.js?t=1" type="text/javascript"></script>
 	<#--<script src="${themeDisplay.pathThemeRoot}/js/main.js?browserId=${browserId}&languageId=${themeDisplay.languageId}&b=${liferayBuild}&t=${.now?datetime?iso_local}" type="text/javascript"></script>-->
@@ -112,40 +116,43 @@
 				Områden
 			</div>
 		</div>
-		{{#each areas}}
-			<div>
-				<div style="display: flex; align-items: center;">
-					<a style="flex-grow: 1" href="#/{{#isnt hasDrugs true}}advice{{/isnt}}{{#is hasDrugs true}}drugs{{/is}}/{{urlencode _title}}" class="list-item js-mainmenu-item item-{{@index}}">
-						<div class="list-item-text">
-							{{_title}}
+		<nav class="toggle-menu">
+			<ul class="toggle-menu-list">
+				{{#each areas}}
+					<li class="{{#if subChapters}}open{{/if}} {{get-chapter-selected-css-class this}}">
+						<div class="toggle-menu-item-main">
+							<a href="#/{{#isnt hasDrugs true}}advice{{/isnt}}{{#is hasDrugs true}}drugs{{/is}}/{{urlencode _title}}" class="js-mainmenu-item item-{{@index}}">
+								<span class="material-icons material-icons-outlined">arrow_right</span>
+								<span>{{_title}}</span>
+							</a>
+							<button class="toggle-submenu-button"data-chapter="{{urlencode _title}}" data-tab="{{#isnt hasDrugs true}}advice{{/isnt}}{{#is hasDrugs true}}drugs{{/is}}">
+								{{#if subChapters}}
+									<span class="material-icons icon-remove">remove</span>
+								{{/if}}
+								{{#unless subChapters}}
+									<span class="material-icons icon-add">add</span>
+								{{/unless}}
+							 </button>
 						</div>
-					</a>
-					<button class="toggle-submenu-button" style="
-						flex-grow: 0;
-						height: 32px;
-						width: 32px;
-						margin-right: 12px;"
-							 data-chapter="{{urlencode _title}}" data-tab="{{#isnt hasDrugs true}}advice{{/isnt}}{{#is hasDrugs true}}drugs{{/is}}">+</button>
-				</div>
-				<#-- Submenu -->
-				<div>
-					{{#each subChapters.fields}}
-						{{#if (findLinkToArticle children) }}
-						<a href="{{findLinkToArticle children}}" class="list-item submenu-item item-{{@index}} js-submenu-item">
-						{{else}}
-						<a href="#/{{../../subChapters.tab}}/{{urlencode ../../subChapters.title}}/{{urlencode value}}" class="list-item submenu-item item-{{@index}} js-submenu-item">
-						{{/if}}
-						{{#is children.0.children.0.value 'physical-exercise'}}
-							<div class="list-item-icon">
-								<i class="flaticon-man460 icon-15x"></i>
-							</div>
-						{{/is}}
-							<div style="font-size: .7em" class="list-item-text submenu-item-text">{{value}}</div>
-						</a>
-					{{/each}}
-				</div>
-			</div>
-		{{/each}}
+						<#-- Submenu -->
+						<ul class="toggle-menu-list">
+							{{#each subChapters.fields}}
+								<li class="{{get-details-selected-css-class this}}">
+									{{#if (findLinkToArticle children) }}
+										<a href="{{findLinkToArticle children}}" class="submenu-item item-{{@index}} js-submenu-item" >
+									{{else}}
+										<a href="#/{{../../subChapters.tab}}/{{urlencode ../../subChapters.title}}/{{urlencode value}}" class="submenu-item item-{{@index}} js-submenu-item">
+									{{/if}}
+										<span class="material-icons material-icons-outlined">arrow_right</span>
+										<span>{{value}}</span>
+									</a>
+								</li>
+							{{/each}}
+						</ul>
+					</li>
+				{{/each}}
+			</ul>
+		</nav>
 	</div>
 </script>
 
