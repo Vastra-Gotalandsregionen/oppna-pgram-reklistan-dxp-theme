@@ -70,7 +70,7 @@
 <script id="main-menu-template" type="text/x-handlebars-template">
 	<div class="search-wrapper view-topper">
 		<div class="second-bar">
-			<div class="search-input-container js-search-input-container">
+			<div class="search-input-container js-search-input-container on">
 				<input type="text" class="search-input js-search-input" placeholder="Sök" autocorrect="off">
 				<a href="#" class="search-clear js-search-clear">Rensa <i class="flaticon-close47"></i></a>
 			</div>
