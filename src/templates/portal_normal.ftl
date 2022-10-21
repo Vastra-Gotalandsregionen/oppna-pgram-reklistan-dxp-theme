@@ -119,7 +119,7 @@
 		<nav class="toggle-menu">
 			<ul class="toggle-menu-list">
 				{{#each areas}}
-					<li class="{{#if subChapters}}open{{/if}} {{get-chapter-selected-css-class this}}">
+					<li class="{{#if subChapters}}open{{/if}} {{get-chapter-selected-css-class this ../chapterClicked}}">
 						<div class="toggle-menu-item-main">
 							<a href="#/{{#isnt hasDrugs true}}advice{{/isnt}}{{#is hasDrugs true}}drugs{{/is}}/{{urlencode _title}}" class="js-mainmenu-item item-{{@index}}">
 								<span class="material-icons material-icons-outlined">chevron_right</span>

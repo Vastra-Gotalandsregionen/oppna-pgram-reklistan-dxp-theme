@@ -246,3 +246,11 @@ $progress-danger: $danger;
 		transform: rotate(180deg)
 	}
 }
+@keyframes rotate180back {
+	0% {
+		transform: rotate(180deg);
+	}
+	100% {
+		transform: rotate(0)
+	}
+}

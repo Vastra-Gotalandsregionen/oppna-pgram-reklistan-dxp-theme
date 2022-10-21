@@ -14,6 +14,43 @@ var navObj = {
 
 var sizeMedium = 768;
 
+var rekLiferayProperties = {
+    localEA: {
+        environment: 'localEA',
+        companyId: 20101,
+        drugsStructureId: 36168,
+        adviceStructureId: 36172,
+        resourcesStructureId: 36176,
+        newsStructureId: 36180,
+    },
+    test: {
+        environment: 'test',
+        companyId: 1712101,
+        drugsStructureId: 1715233,
+        adviceStructureId: 1715235,
+        resourcesStructureId: 1715238,
+        newsStructureId: 2080202,
+    },
+    stage: {
+        environment: 'stage',
+        companyId: 1712101,
+        drugsStructureId: 1715233,
+        adviceStructureId: 1715235,
+        resourcesStructureId: 1715238,
+        newsStructureId: 2080202,
+    },
+    prod: {
+        environment: 'prod',
+        companyId: 1712101,
+        drugsStructureId: 1715233,
+        adviceStructureId: 1715235,
+        resourcesStructureId: 1715238,
+        newsStructureId: 2080202,
+    }
+};
+
+var rekActiveEnvironment = rekLiferayProperties.prod;
+
 var rekData = {
     mainMenuData: [],
     dataDrugs: [],
@@ -24,42 +61,12 @@ var rekData = {
     hbsAdvice: '',
     hbsResources: '',
     properties: {
-
-        // Local Dev
-        // companyId: 1674701,
-        // drugsStructureId: 1728835,
-        // adviceStructureId: 1728833,
-        // resourcesStructureId: 1728837,
-        // newsStructureId: 1770002,
-
-        // EA local:
-        // companyId: 20101,
-        // drugsStructureId: 36168,
-        // adviceStructureId: 36172,
-        // resourcesStructureId: 36176,
-        // newsStructureId: 36180,
-
-        // Test
-        // companyId: 1712101,
-        // drugsStructureId: 1715233,
-        // adviceStructureId: 1715235,
-        // resourcesStructureId: 1715238,
-        // newsStructureId: 2080202,
-
-        // Stage
-        // companyId: 1712101,
-        // drugsStructureId: 1715233,
-        // adviceStructureId: 1715235,
-        // resourcesStructureId: 1715238,
-        // newsStructureId: 2080202,
-
-        // Live:
-        companyId: 1712101,
-        drugsStructureId: 1715233,
-        adviceStructureId: 1715235,
-        resourcesStructureId: 1715238,
-        newsStructureId: 2080202,
-
+        environment: rekActiveEnvironment.environment,
+        companyId: rekActiveEnvironment.companyId,
+        drugsStructureId: rekActiveEnvironment.drugsStructureId,
+        adviceStructureId: rekActiveEnvironment.adviceStructureId,
+        resourcesStructureId: rekActiveEnvironment.resourcesStructureId,
+        newsStructureId: rekActiveEnvironment.newsStructureId,
         groupName: 'Guest',
         locale: 'sv_SE',
         secondsCacheData: 3600, //3600 == 1h.
@@ -706,7 +713,8 @@ function initializeToggleSubmenuButtons(dataMainMenu, dataNews, dataResources) {
         var data = {
             areas: dataMainMenu,
             news: dataNews,
-            resources: dataResources
+            resources: dataResources,
+            chapterClicked: chapter
         };
         printTemplate(data, "#main-menu-template", '#main-menu-placeholder');
 
@@ -1112,18 +1120,26 @@ function registerHandlebarHelpers() {
         return new Handlebars.SafeString(text);
     });
 
-    Handlebars.registerHelper('get-chapter-selected-css-class', function(context) {
+    Handlebars.registerHelper('get-chapter-selected-css-class', function(context, chapterClicked) {
         var urlSafeTitle = makeUrlSafe(context._title, true);
+
+        var cssClass = '';
 
         if(urlSafeTitle === navObj.currentChapter) {
             if(navObj.currentDetails === '') {
-                return 'selected current';
+                cssClass = 'selected current';
             } else {
-                return 'selected';
+                cssClass = 'selected';
             }
         } else {
-            return '';
+            cssClass = '';
         }
+
+        if(urlSafeTitle === chapterClicked) {
+            cssClass += ' clicked';
+        }
+
+        return cssClass;
     });
 
     Handlebars.registerHelper('get-details-selected-css-class', function(context) {

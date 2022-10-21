@@ -72,6 +72,19 @@
         }
       }
 
+      &.clicked {
+        .toggle-submenu-button {
+          .material-icons {
+            &.icon-remove {
+              animation: rotate180 0.2s ease-in-out;
+            }
+            &.icon-add {
+              animation: rotate180back 0.2s ease-in-out;
+            }
+          }
+        }
+      }
+
     }
   }
 
