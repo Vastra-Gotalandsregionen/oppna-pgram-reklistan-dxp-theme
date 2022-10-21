@@ -24,7 +24,7 @@
 	<#--
     <link class="lfr-css-file" href="${themeDisplay.pathThemeRoot}/css/main.css?browserId=${browserId}&themeId=${themeDisplay.themeId}&languageId=${themeDisplay.languageId}xx&b=${liferayBuild}&t=2" rel="stylesheet" type="text/css">
     -->
-	<link class="lfr-css-file" data-senna-track="temporary" href="${css_main_file}" rel="stylesheet" type="text/css" />
+	<link class="lfr-css-file" data-senna-track="temporary" href="${css_main_file}?t=${rekBuildTicker}" rel="stylesheet" type="text/css" />
 	<script src="${themeDisplay.pathThemeRoot}/js/libs.min.js?t=1" type="text/javascript"></script>
     <script src="${themeDisplay.pathThemeRoot}/js/lunr.unicodeNormalizer.js?t=1" type="text/javascript"></script>
 	<#--<script src="${themeDisplay.pathThemeRoot}/js/main.js?browserId=${browserId}&languageId=${themeDisplay.languageId}&b=${liferayBuild}&t=${.now?datetime?iso_local}" type="text/javascript"></script>-->
@@ -313,7 +313,7 @@
 	</div>
 </div>
 
-<script src="${themeDisplay.pathThemeRoot}/js/main.js?browserId=${browserId}&languageId=${themeDisplay.languageId}&b=${liferayBuild}&t=173" type="text/javascript"></script>
+<script src="${themeDisplay.pathThemeRoot}/js/main.js?browserId=${browserId}&languageId=${themeDisplay.languageId}&b=${liferayBuild}&t=${rekBuildTicker}" type="text/javascript"></script>
 
 <script>
     initApp();

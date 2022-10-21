@@ -5,6 +5,7 @@
  #
  # -->
 
+<#assign rekBuildTicker = '175' />
 
 <#assign browserId = 'other'>
 <#assign ReleaseLocalService = serviceLocator.findService("com.liferay.portal.kernel.service.ReleaseLocalService") />
