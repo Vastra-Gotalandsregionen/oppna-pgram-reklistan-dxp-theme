@@ -313,7 +313,7 @@
 	</div>
 </div>
 
-<script src="${themeDisplay.pathThemeRoot}/js/main.js?browserId=${browserId}&languageId=${themeDisplay.languageId}&b=${liferayBuild}&t=172" type="text/javascript"></script>
+<script src="${themeDisplay.pathThemeRoot}/js/main.js?browserId=${browserId}&languageId=${themeDisplay.languageId}&b=${liferayBuild}&t=173" type="text/javascript"></script>
 
 <script>
     initApp();
