@@ -14,65 +14,68 @@ var navObj = {
 
 var sizeMedium = 768;
 
-var rekLiferayProperties = {
-    localEA: {
-        environment: 'localEA',
-        companyId: 20101,
-        drugsStructureId: 36168,
-        adviceStructureId: 36172,
-        resourcesStructureId: 36176,
-        newsStructureId: 36180,
-    },
-    test: {
-        environment: 'test',
-        companyId: 1712101,
-        drugsStructureId: 1715233,
-        adviceStructureId: 1715235,
-        resourcesStructureId: 1715238,
-        newsStructureId: 2080202,
-    },
-    stage: {
-        environment: 'stage',
-        companyId: 1712101,
-        drugsStructureId: 1715233,
-        adviceStructureId: 1715235,
-        resourcesStructureId: 1715238,
-        newsStructureId: 2080202,
-    },
-    prod: {
-        environment: 'prod',
-        companyId: 1712101,
-        drugsStructureId: 1715233,
-        adviceStructureId: 1715235,
-        resourcesStructureId: 1715238,
-        newsStructureId: 2080202,
-    }
-};
+// var rekLiferayProperties = {
+//     localEA: {
+//         environment: 'localEA',
+//         companyId: 20101,
+//         drugsStructureId: 36168,
+//         adviceStructureId: 36172,
+//         resourcesStructureId: 36176,
+//         newsStructureId: 36180,
+//     },
+//     test: {
+//         environment: 'test',
+//         companyId: 1712101,
+//         drugsStructureId: 1715233,
+//         adviceStructureId: 1715235,
+//         resourcesStructureId: 1715238,
+//         newsStructureId: 2080202,
+//     },
+//     stage: {
+//         environment: 'stage',
+//         companyId: 1712101,
+//         drugsStructureId: 1715233,
+//         adviceStructureId: 1715235,
+//         resourcesStructureId: 1715238,
+//         newsStructureId: 2080202,
+//     },
+//     prod: {
+//         environment: 'prod',
+//         companyId: 1712101,
+//         drugsStructureId: 1715233,
+//         adviceStructureId: 1715235,
+//         resourcesStructureId: 1715238,
+//         newsStructureId: 2080202,
+//     }
+// };
+//
+// var rekActiveEnvironment = rekLiferayProperties.localEA;
+//
+// var rekData = {
+//     mainMenuData: [],
+//     dataDrugs: [],
+//     dataAdvice: [],
+//     dataResources: [],
+//     dataNews: [],
+//     hbsDrugs: '',
+//     hbsAdvice: '',
+//     hbsResources: '',
+//     properties: {
+//         environment: rekActiveEnvironment.environment,
+//         companyId: rekActiveEnvironment.companyId,
+//         drugsStructureId: rekActiveEnvironment.drugsStructureId,
+//         adviceStructureId: rekActiveEnvironment.adviceStructureId,
+//         resourcesStructureId: rekActiveEnvironment.resourcesStructureId,
+//         newsStructureId: rekActiveEnvironment.newsStructureId,
+//         groupName: 'Guest',
+//         locale: 'sv_SE',
+//         secondsCacheData: 3600, //3600 == 1h.
+//         rekVersion: 2
+//     }
+// };
 
-var rekActiveEnvironment = rekLiferayProperties.localEA;
-
-var rekData = {
-    mainMenuData: [],
-    dataDrugs: [],
-    dataAdvice: [],
-    dataResources: [],
-    dataNews: [],
-    hbsDrugs: '',
-    hbsAdvice: '',
-    hbsResources: '',
-    properties: {
-        environment: rekActiveEnvironment.environment,
-        companyId: rekActiveEnvironment.companyId,
-        drugsStructureId: rekActiveEnvironment.drugsStructureId,
-        adviceStructureId: rekActiveEnvironment.adviceStructureId,
-        resourcesStructureId: rekActiveEnvironment.resourcesStructureId,
-        newsStructureId: rekActiveEnvironment.newsStructureId,
-        groupName: 'Guest',
-        locale: 'sv_SE',
-        secondsCacheData: 3600, //3600 == 1h.
-        rekVersion: 2
-    }
-};
+// Variable rekData has been moved to script in rek_data.ftl
+// Which environment that is active is controlled in init_environment.ftl
 
 function clearCache() {
     storage

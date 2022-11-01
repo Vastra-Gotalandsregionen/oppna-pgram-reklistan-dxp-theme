@@ -1,44 +1,35 @@
 .vgr-logo {
 	text-align: center;
 	margin-top: 56px;
+	text-align: left;
+
+	img {
+		max-width: 300px;
+	}
 }
 
-
-/*
-.meta-navigation {
-
-	width: 60%;
-	margin: 0 auto;
-
-	ul {
-		border: 1px solid rgba(0, 0, 0, 0.12);
-		list-style-type: none;
-		padding: 0;
-	}
-
-	li {
-		list-style-type: none;
-	}
-
-	a, 
-	a:visited {
-    	color: rgba(0, 0, 0, 0.57);
-	}
-
-	a {
-		color: rgba(0, 0, 0, 0.57);
-		display: block;
-		padding: 0.5em 1em;
-		
-		transition: background-color 250ms;		
-	}
-
-	.no-touch & a:hover {
-		background-color: rgba(0, 0, 0, 0.12);
-	}
-
-}
-*/
+//.logo-section {
+//	align-items: center;
+//	display: flex;
+//	margin-top: 3.5rem;
+//
+//	.logo-rek {
+//		background: $color-vgr-blue;
+//		padding: 1rem;
+//
+//		img {
+//			height: 3rem;
+//		}
+//	}
+//
+//	.logo-vgr {
+//		padding: 1rem;
+//
+//		img {
+//			height: 3rem;
+//		}
+//	}
+//}
 
 .details-inner {
 	width: 404px;

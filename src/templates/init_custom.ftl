@@ -14,3 +14,5 @@
 <#assign authToken = authTokenUtil.getToken(request) />
 
 <#assign currentUserSignedIn = themeDisplay.isSignedIn() />
+
+<#include "${full_templates_path}/init_environment.ftl" />

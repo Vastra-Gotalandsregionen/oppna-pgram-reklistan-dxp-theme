@@ -4,7 +4,7 @@
 	@include link-inverse();
     @extend .shadow-z-1;
 
-    height: 56px;
+    height: $appbar-height;
     width: 100%;
 }
 
@@ -44,8 +44,8 @@
 
 .appbar-menu-title {
     line-height: 40px;
-    padding: 0 13px;
-    font-size: 20px;
+    padding: 0;
+    font-size: 1.25rem;
 
     a,
     a:visited,
@@ -53,17 +53,44 @@
     a:hover {
         color: $color-white;
         text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: left;
+        //margin: 0 auto 0 calc(50% - 143px);
+        padding: 0.5rem 1rem 0 1rem;
+
+        @include medium {
+            justify-content: center;
+            margin: 0 auto;
+            padding: 0.5rem 1rem 0 1rem;
+        }
+
+        img {
+            height: 2rem;
+            margin-right: 0.5rem;
+        }
     }
 
     .appbar-menu-sub-title {
         position: absolute;
-        text-align: center;
-        margin: 0 auto 0 calc(50% - 143px);
+        text-align: left;
         text-decoration: none;
-        font-size: 13px;
-        bottom: 6px;
+        font-size: 0.875rem;
+        bottom: 0.5rem;
+        bottom: 0;
         line-height: 12px;
-        font-weight: 300;
+        font-weight: 400;
+        width: 100%;
+        padding: 0.5rem 1.0rem;
+
+        //position: static;
+
+
+        @include medium {
+            text-align: center;
+            //padding: 0;
+            padding: 0.5rem 0;
+        }
     }
 }
 
@@ -74,6 +101,7 @@
 .appbar-menu-sink-wrapper {
     position: absolute;
     height: $appbar-height;
+    right: 0;
 
     @include translate(-50px, 0);
     @include opacity(0);

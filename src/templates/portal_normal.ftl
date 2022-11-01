@@ -27,7 +27,7 @@
 	<link class="lfr-css-file" data-senna-track="temporary" href="${css_main_file}?t=${rekBuildTicker}" rel="stylesheet" type="text/css" />
 	<script src="${themeDisplay.pathThemeRoot}/js/libs.min.js?t=1" type="text/javascript"></script>
     <script src="${themeDisplay.pathThemeRoot}/js/lunr.unicodeNormalizer.js?t=1" type="text/javascript"></script>
-	<#--<script src="${themeDisplay.pathThemeRoot}/js/main.js?browserId=${browserId}&languageId=${themeDisplay.languageId}&b=${liferayBuild}&t=${.now?datetime?iso_local}" type="text/javascript"></script>-->
+	<#include "${full_templates_path}/rek_data.ftl" />
 </head>
 
 <body class="${css_class}">
@@ -175,8 +175,14 @@
 <script id="filler-template" type="text/x-handlebars-template">
 	<div class="details-inner">
 		<div class="vgr-logo">
-			<img src="${images_folder}/theme/vgr-w400-c.png">
+			<img src="${images_folder}/logo/vgr-logotyp.svg">
 		</div>
+
+		<#include "${full_templates_path}/main_intro.ftl" />
+		<#if includeDummyLinkList>
+			<#include "${full_templates_path}/mock/dummy_link_list.ftl" />
+		</#if>
+
 		{{#if news}}
 			<div class="link-list">
 				<h2>${txtNews}</h2>
@@ -270,19 +276,23 @@
 		<div class="appbar">
 			<div class="appbar-menu-title-wrapper">
                 <div class="appbar-menu-title">
-                    <a href="#">REK<span class="thin">listan <span id="revisionPlaceholder"></span></span></a>
+                    <a href="#">
+						<img src="${images_folder}/logo/reklista_pilar.svg">
+						<span class="appbar-menu-title-main">REK</span>
+						<span class="thin">listan <span id="revisionPlaceholder"></span></span>
+					</a>
                     <div class="appbar-menu-sub-title">Läkemedelskommittén i Västra Götalandsregionen</div>
                 </div>
             </div>
 
             <div class="appbar-menu-sink-wrapper js-appbar-menu-sink-toggle">
 				<div class="appbar-menu-sink-button">
-					<span class="flaticon-menu55 icon-4x"></span>
+					<span class="flaticon-menu55 icon-3x"></span>
 				</div>
 			</div>
 			<a class="appbar-menu-back-wrapper js-navigation-button">
 				<div class="appbar-menu-back-button">
-					<i class="flaticon-left216 icon-4x"></i>
+					<i class="flaticon-left216 icon-3x"></i>
 			    </div>
 		    	<div class="appbar-menu-back-label mt-small">Tillbaka</div>
 			</a>
