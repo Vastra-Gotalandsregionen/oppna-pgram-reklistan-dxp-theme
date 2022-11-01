@@ -139,11 +139,13 @@
 								<li class="{{get-details-selected-css-class this}}">
 									{{#if (findLinkToArticle children) }}
 										<a href="{{findLinkToArticle children}}" class="submenu-item item-{{@index}} js-submenu-item" >
+											<span>{{value}} <i class="flaticon-keyboard53"></i></span>
+										</a>
 									{{else}}
 										<a href="#/{{../../subChapters.tab}}/{{urlencode ../../subChapters.title}}/{{urlencode value}}" class="submenu-item item-{{@index}} js-submenu-item">
+											<span>{{value}}</span>
+										</a>
 									{{/if}}
-										<span>{{value}}</span>
-									</a>
 								</li>
 							{{/each}}
 						</ul>
