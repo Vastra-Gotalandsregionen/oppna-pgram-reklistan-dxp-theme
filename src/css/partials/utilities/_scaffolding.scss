@@ -76,7 +76,7 @@
 
 @include medium {
     #app-wrapper {
-        max-width: 1000px;
+        max-width: $max-width;
         margin: 0 auto;
         height: 100%;
     }
@@ -86,7 +86,8 @@
     }
 
     #topbar {
-        width: 1000px;
+        width: 100%;
+        max-width: $max-width;
         height: $appbar-height;
         position: fixed;
         z-index:999;

@@ -122,7 +122,6 @@
 					<li class="{{#if subChapters}}open{{/if}} {{get-chapter-selected-css-class this ../chapterClicked}}">
 						<div class="toggle-menu-item-main">
 							<a href="#/{{#isnt hasDrugs true}}advice{{/isnt}}{{#is hasDrugs true}}drugs{{/is}}/{{urlencode _title}}" class="js-mainmenu-item item-{{@index}}">
-								<span class="material-icons material-icons-outlined">chevron_right</span>
 								<span>{{_title}}</span>
 							</a>
 							<button class="toggle-submenu-button"data-chapter="{{urlencode _title}}" data-tab="{{#isnt hasDrugs true}}advice{{/isnt}}{{#is hasDrugs true}}drugs{{/is}}">
@@ -143,7 +142,6 @@
 									{{else}}
 										<a href="#/{{../../subChapters.tab}}/{{urlencode ../../subChapters.title}}/{{urlencode value}}" class="submenu-item item-{{@index}} js-submenu-item">
 									{{/if}}
-										<span class="material-icons material-icons-outlined">chevron_right</span>
 										<span>{{value}}</span>
 									</a>
 								</li>
