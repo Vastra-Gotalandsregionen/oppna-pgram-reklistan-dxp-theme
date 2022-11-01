@@ -5,7 +5,7 @@
     prod
 -->
 
-<#assign activeEnvironment = "localEA" />
+<#assign activeEnvironment = "prod" />
 
 <#assign liferayCompanyId = 0 />
 <#assign liferayDrugsStructureId = 0 />
