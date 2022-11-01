@@ -49,7 +49,7 @@ var rekLiferayProperties = {
     }
 };
 
-var rekActiveEnvironment = rekLiferayProperties.prod;
+var rekActiveEnvironment = rekLiferayProperties.localEA;
 
 var rekData = {
     mainMenuData: [],
@@ -683,8 +683,10 @@ function showGeneric(type, clickedItem) {
 
 function initializeToggleSubmenuButtons(dataMainMenu, dataNews, dataResources) {
     var toggleButton = $('.toggle-submenu-button');
+    var levelOneLinks = $('.toggle-menu-item-main > a');
 
     toggleButton.unbind('click');
+    levelOneLinks.unbind('click');
 
     toggleButton.click(function (event) {
         var chapter = event.currentTarget.dataset.chapter;
@@ -722,6 +724,30 @@ function initializeToggleSubmenuButtons(dataMainMenu, dataNews, dataResources) {
 
         initializeToggleSubmenuButtons(dataMainMenu, dataNews, dataResources);
     });
+
+    levelOneLinks.click(function (event) {
+        var isMobile = navObj.isMobileView;
+
+        if(isMobile) {
+            event.stopPropagation();
+            event.preventDefault();
+
+            var toggleButton = $(event.currentTarget).siblings('.toggle-submenu-button');
+            toggleButton.click();
+            return false;
+        } else {
+            // Collapse all sections that are opened before moving on
+            dataMainMenu.forEach(function(dataMainMenuItem, i) {
+                if(dataMainMenuItem['subChapters']) {
+                    delete dataMainMenuItem['subChapters'];
+                }
+            });
+        }
+
+    });
+
+
+
 }
 
 /* ************************************************************************* *\

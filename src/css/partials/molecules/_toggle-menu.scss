@@ -130,9 +130,9 @@
         padding: 0.625rem 1rem;
       }
 
-      &:first-child {
+      &:first-child:not(.current) {
         a {
-          padding-top: 0;
+          padding-top: 0.3125rem;
         }
       }
 
