@@ -128,6 +128,11 @@
     position: absolute;
     cursor: pointer;
     height: $appbar-height;
+    right: 0;
+
+    @include medium {
+        left: 0;
+    }
 
     @include translate(0, 0);
     @include opacity(1);

@@ -5,7 +5,7 @@
     prod
 -->
 
-<#assign activeEnvironment = "prod" />
+<#assign activeEnvironment = "localEA" />
 <#assign rekBuildTicker = '180' />
 
 <#assign liferayCompanyId = 0 />
