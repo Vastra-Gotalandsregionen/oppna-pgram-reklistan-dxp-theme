@@ -84,7 +84,10 @@
 	</div>
 	<div id="search-results-placeholder"></div>
 	<div class="main-menu-logo">
+		<#--
 		<img src="${images_folder}/theme/vgr-w400-c.png">
+		-->
+		<img src="${images_folder}/logo/vgr-logotyp.svg">
 	</div>
 	{{#if news}}
 		<div class="main-menu-news-container js-main-menu-news-container lt-medium">
@@ -137,10 +140,16 @@
 						<ul class="toggle-menu-list">
 							{{#each subChapters.fields}}
 								<li class="{{get-details-selected-css-class this}}">
-									{{#if (findLinkToArticle children) }}
-										<a href="{{findLinkToArticle children}}" class="submenu-item item-{{@index}} js-submenu-item" >
-											<span>{{value}} <i class="flaticon-keyboard53"></i></span>
-										</a>
+									{{#if (hasLinkToArticleOrSite children) }}
+										{{#if (findLinkToArticle children) }}
+											<a href="{{findLinkToArticle children}}" class="submenu-item item-{{@index}} js-submenu-item" >
+												<span>{{value}} <i class="flaticon-keyboard53"></i></span>
+											</a>
+										{{else}}
+											<a href="{{findLinkToSite children}}" class="submenu-item item-{{@index}} js-submenu-item" target="_BLANK" >
+												<span>{{value}} <i class="flaticon-external1"></i></span>
+											</a>
+										{{/if}}
 									{{else}}
 										<a href="#/{{../../subChapters.tab}}/{{urlencode ../../subChapters.title}}/{{urlencode value}}" class="submenu-item item-{{@index}} js-submenu-item">
 											<span>{{value}}</span>

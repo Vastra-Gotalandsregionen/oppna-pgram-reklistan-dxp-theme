@@ -6,6 +6,7 @@
 -->
 
 <#assign activeEnvironment = "prod" />
+<#assign rekBuildTicker = '180' />
 
 <#assign liferayCompanyId = 0 />
 <#assign liferayDrugsStructureId = 0 />

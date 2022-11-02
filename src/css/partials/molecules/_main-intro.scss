@@ -1,3 +1,16 @@
 .main-intro {
-  margin-top: 3rem;
+  margin-top: 2rem;
+
+  @include medium {
+    margin-top: 3rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    @include medium {
+      font-size: 1.5rem;
+    }
+  }
+
+
 }

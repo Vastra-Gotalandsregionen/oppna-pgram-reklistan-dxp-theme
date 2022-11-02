@@ -32,8 +32,22 @@
 //}
 
 .details-inner {
-	width: 404px;
+	width: calc(100% - 2rem);
+	max-width: 404px;
 	margin: 0 auto;
+	padding: 1rem;
+
+	.vgr-logo {
+		display: none;
+	}
+
+	@include medium {
+		padding: 0;
+
+		.vgr-logo {
+			display: block;
+		}
+	}
 }
 
 

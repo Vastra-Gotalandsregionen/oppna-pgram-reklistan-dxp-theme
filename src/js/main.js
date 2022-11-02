@@ -1046,6 +1046,22 @@ function registerHandlebarHelpers() {
         return new Handlebars.SafeString(ret);
     });
 
+    Handlebars.registerHelper('hasLinkToArticleOrSite', function(context) {
+        var hasLinkToArticleOrSite = context.some(function (field) {
+            if (field.name) {
+                if (field.name === 'linktoarticle' || field.name === 'linktosite') {
+                    if (field.value.length > 0) {
+                        hasLinkToArticleOrSite = true;
+                        return true;
+                    }
+                }
+            }
+            return false;
+        });
+
+        return hasLinkToArticleOrSite;
+    });
+
     Handlebars.registerHelper('findLinkToArticle', function(context) {
         var foundLinkToArticle = null;
         var hasLinkToArticle = context.some(function (field) {
@@ -1066,6 +1082,28 @@ function registerHandlebarHelpers() {
             return false;
         }
     });
+
+    Handlebars.registerHelper('findLinkToSite', function(context) {
+        var foundLinkToSite = null;
+        var hasLinkToSite = context.some(function (field) {
+            if (field.name) {
+                if (field.name === 'linktosite') {
+                    if (field.value.length > 0) {
+                        foundLinkToSite = field.value;
+                        return true;
+                    }
+                }
+            }
+            return false;
+        });
+
+        if (hasLinkToSite) {
+            return foundLinkToSite;
+        } else {
+            return false;
+        }
+    });
+
 
     /**
      * Parse the text and do some replacing
