@@ -88,6 +88,7 @@
 		<img src="${images_folder}/logo/vgr-logotyp.svg">
 	</div>
 	-->
+	<#--
 	{{#if news}}
 		<div class="main-menu-news-container js-main-menu-news-container lt-medium">
 			<div class="list-item list-item-heading">
@@ -112,6 +113,7 @@
 			{{/each}}
 		</div>
 	{{/if}}
+	-->
 	<div class="mainmenu-area-items">
 		<div class="list-item list-item-heading lt-medium">
 			<div class="list-item-text">
