@@ -5,7 +5,7 @@ $spinner-nonactive-color: lighten($color-gray-temp1, 30);
 .loading-indicator {
     position: fixed;
     width: 100%;
-    max-width: 1000px;
+    max-width: $max-width;
     z-index: 1000;
     text-align: center;
     top: $full-row-height + 16px;
