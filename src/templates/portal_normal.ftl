@@ -83,12 +83,11 @@
 		</div>
 	</div>
 	<div id="search-results-placeholder"></div>
+	<#--
 	<div class="main-menu-logo">
-		<#--
-		<img src="${images_folder}/theme/vgr-w400-c.png">
-		-->
 		<img src="${images_folder}/logo/vgr-logotyp.svg">
 	</div>
+	-->
 	{{#if news}}
 		<div class="main-menu-news-container js-main-menu-news-container lt-medium">
 			<div class="list-item list-item-heading">
@@ -183,15 +182,42 @@
 <#-- HBS FILLER -->
 <script id="filler-template" type="text/x-handlebars-template">
 	<div class="details-inner">
-		<div class="vgr-logo">
-			<img src="${images_folder}/logo/vgr-logotyp.svg">
-		</div>
-
 		<#include "${full_templates_path}/main_intro.ftl" />
+
 		<#if includeDummyLinkList>
 			<#include "${full_templates_path}/mock/dummy_link_list.ftl" />
 		</#if>
 
+		<div class="link-list">
+			<ul>
+				{{#if news}}
+					{{#each news}}
+						{{#if externallink}}
+							<li><a href="{{externallink}}" target="_blank"><i class="flaticon-external1"></i> {{title}}</a></li>
+						{{/if}}
+						{{#unless externallink}}
+							<li><a href="#/news/{{id}}"><i class="flaticon-keyboard53"></i> {{title}}</a></li>
+						{{/unless}}
+					{{/each}}
+				{{/if}}
+				{{#if resources}}
+					{{#each resources}}
+						{{#if externallink}}
+							<li><a href="{{externallink}}" target="_blank"><i class="flaticon-external1"></i> {{title}}</a></li>
+						{{/if}}
+						{{#unless externallink}}
+							<li><a href="#/resource/{{urlencode title}}"><i class="flaticon-keyboard53"></i> {{title}}</a></li>
+						{{/unless}}
+					{{/each}}
+				{{/if}}
+			</ul>
+		</div>
+
+		<div class="vgr-logo">
+			<img src="${images_folder}/logo/vgr-logotyp.svg">
+		</div>
+
+		<#--
 		{{#if news}}
 			<div class="link-list">
 				<h2>${txtNews}</h2>
@@ -223,6 +249,7 @@
 				</ul>
 			</div>
 		{{/if}}
+		-->
 
 	</div>
 </script>

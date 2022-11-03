@@ -1,14 +1,33 @@
 .main-intro {
   margin-top: 2rem;
 
+  background: $color-gray-temp;
+  padding: 2rem;
+  border-top: 4px solid $color-vgr-blue;
+
   @include medium {
-    margin-top: 3rem;
+    margin-top: 4rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+    color: $color-vgr-blue;
+    font-weight: 400;
+    margin-top: 0;
   }
 
   h2 {
     font-size: 1.25rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
     @include medium {
-      font-size: 1.5rem;
+      font-size: 1.25rem;
+    }
+  }
+
+  p {
+    &:last-child {
+      margin-bottom: 0;
     }
   }
 

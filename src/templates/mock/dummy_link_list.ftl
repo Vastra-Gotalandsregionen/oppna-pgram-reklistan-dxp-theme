@@ -1,5 +1,7 @@
 <div class="link-list">
+    <#--
     <h2>Övrigt</h2>
+    -->
     <ul>
         <li><a href="#/resource/Terapigrupper_kontaktuppgifter"><i class="flaticon-keyboard53"></i> Terapigrupper kontaktuppgifter</a></li>
         <li><a href="#/resource/Om_REKlistan"><i class="flaticon-keyboard53"></i> Om REKlistan</a></li>

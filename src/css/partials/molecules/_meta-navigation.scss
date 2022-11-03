@@ -1,51 +1,23 @@
-.vgr-logo {
-	text-align: center;
-	margin-top: 56px;
-	text-align: left;
-
-	img {
-		max-width: 300px;
-	}
-}
-
-//.logo-section {
-//	align-items: center;
-//	display: flex;
-//	margin-top: 3.5rem;
-//
-//	.logo-rek {
-//		background: $color-vgr-blue;
-//		padding: 1rem;
-//
-//		img {
-//			height: 3rem;
-//		}
-//	}
-//
-//	.logo-vgr {
-//		padding: 1rem;
-//
-//		img {
-//			height: 3rem;
-//		}
-//	}
-//}
-
 .details-inner {
 	width: calc(100% - 2rem);
-	max-width: 404px;
+	max-width: 600px;
 	margin: 0 auto;
 	padding: 1rem;
 
 	.vgr-logo {
-		display: none;
+		margin-top: 3rem;
+		text-align: center;
+
+		img {
+			max-width: 300px;
+		}
 	}
 
 	@include medium {
 		padding: 0;
 
 		.vgr-logo {
-			display: block;
+			text-align: left;
 		}
 	}
 }
@@ -63,10 +35,8 @@
 
 	ul {
 		list-style-type: none;
-		
-
-
-		margin: 5px;
+		margin: 0 5px;
+		margin: 0;
 		padding: 0;
 	}
 
@@ -74,6 +44,16 @@
 		list-style-type: none;
 		padding: 0;
 		@include border-bottom-line();
+
+		&:first-child {
+			margin-top: 5px;
+			margin-top: 1rem;
+		}
+
+		&:last-child {
+			margin-bottom: 5px;
+			margin-bottom: 1rem;
+		}
 	}
 
 	a, 

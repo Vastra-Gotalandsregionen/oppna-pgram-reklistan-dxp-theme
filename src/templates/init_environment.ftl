@@ -6,7 +6,7 @@
 -->
 
 <#assign activeEnvironment = "prod" />
-<#assign rekBuildTicker = '180' />
+<#assign rekBuildTicker = "182" />
 
 <#assign liferayCompanyId = 0 />
 <#assign liferayDrugsStructureId = 0 />
@@ -24,7 +24,7 @@
     <#assign liferayResourcesStructureId = 36176 />
     <#assign liferayNewsStructureId = 36180 />
     <#assign liferayGroupName = "Guest" />
-    <#assign includeDummyLinkList = false />
+    <#assign includeDummyLinkList = true />
 <#elseif activeEnvironment == "test">
     <#assign liferayCompanyId = 1712101 />
     <#assign liferayDrugsStructureId = 1715233 />
