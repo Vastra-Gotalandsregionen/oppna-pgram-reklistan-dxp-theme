@@ -312,7 +312,7 @@
 		<div class="appbar">
 			<div class="appbar-menu-title-wrapper">
                 <div class="appbar-menu-title">
-                    <a href="#">
+                    <a href="/">
 						<img src="${images_folder}/logo/reklista_pilar.svg">
 						<span class="appbar-menu-title-main">REK</span>
 						<span class="thin">listan <span id="revisionPlaceholder"></span></span>
