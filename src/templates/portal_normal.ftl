@@ -200,7 +200,12 @@
 							<li><a href="{{externallink}}" target="_blank"><i class="flaticon-external1"></i> {{title}}</a></li>
 						{{/if}}
 						{{#unless externallink}}
-							<li><a href="#/news/{{id}}"><i class="flaticon-keyboard53"></i> {{title}}</a></li>
+							{{#if linktoarticle}}
+								<li><a href="#/{{linktoarticle}}"><i class="flaticon-keyboard53"></i> {{title}}</a></li>
+							{{/if}}
+							{{#unless linktoarticle}}
+								<li><a href="#/news/{{id}}"><i class="flaticon-keyboard53"></i> {{title}}</a></li>
+							{{/unless}}
 						{{/unless}}
 					{{/each}}
 				{{/if}}
@@ -210,7 +215,12 @@
 							<li><a href="{{externallink}}" target="_blank"><i class="flaticon-external1"></i> {{title}}</a></li>
 						{{/if}}
 						{{#unless externallink}}
-							<li><a href="#/resource/{{urlencode title}}"><i class="flaticon-keyboard53"></i> {{title}}</a></li>
+							{{#if linktoarticle}}
+								<li><a href="#/{{linktoarticle}}"><i class="flaticon-keyboard53"></i> {{title}}</a></li>
+							{{/if}}
+							{{#unless linktoarticle}}
+								<li><a href="#/resource/{{urlencode title}}"><i class="flaticon-keyboard53"></i> {{title}}</a></li>
+							{{/unless}}
 						{{/unless}}
 					{{/each}}
 				{{/if}}
