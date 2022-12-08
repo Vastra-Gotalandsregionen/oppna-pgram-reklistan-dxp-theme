@@ -1,8 +1,5 @@
 <div class="main-intro">
-    <#--
-    <h2>REKlistan – ett stöd för en god och säker läkemedelsanvändning</h2>
-    -->
-    <h1>REK-listan</h1>
+    <h1>REKlistan</h1>
     <h2>Ett stöd för en god och säker läkemedelsanvändning</h2>
     <p>I REKlistan presenteras läkemedel som rekommenderas för behandling av vanliga sjukdomar.
         Rekommendationerna är grundade på vetenskaplig dokumentation avseende effekt och säkerhet, farmaceutisk ändamålsenlighet, kostnadseffektivitet och miljöaspekter.</p>

@@ -2,11 +2,11 @@
   margin-top: 2rem;
 
   background: $color-gray-temp;
-  padding: 2rem;
+  padding: 1.5rem;
   border-top: 4px solid $color-vgr-blue;
 
   @include medium {
-    margin-top: 4rem;
+    margin-top: 2rem;
   }
 
   h1 {
@@ -28,6 +28,7 @@
   p {
     &:last-child {
       margin-bottom: 0;
+      padding-bottom: 0;
     }
   }
 
