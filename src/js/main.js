@@ -630,7 +630,6 @@ function initializeToggleSubmenuButtons(dataMainMenu, dataNews, dataResources) {
 
     toggleButton.unbind('click');
     levelOneLinks.unbind('click');
-
     toggleButton.click(function (event) {
         var chapter = event.currentTarget.dataset.chapter;
         var tab = event.currentTarget.dataset.tab;
@@ -670,21 +669,28 @@ function initializeToggleSubmenuButtons(dataMainMenu, dataNews, dataResources) {
 
     levelOneLinks.click(function (event) {
         var isMobile = navObj.isMobileView;
+        var toggleButton = $(event.currentTarget).siblings('.toggle-submenu-button');
+
+        var chapter = event.currentTarget.dataset.chapter;
 
         if(isMobile) {
             event.stopPropagation();
             event.preventDefault();
 
-            var toggleButton = $(event.currentTarget).siblings('.toggle-submenu-button');
             toggleButton.click();
             return false;
         } else {
-            // Collapse all sections that are opened before moving on
-            dataMainMenu.forEach(function(dataMainMenuItem, i) {
-                if(dataMainMenuItem['subChapters']) {
-                    delete dataMainMenuItem['subChapters'];
-                }
-            });
+            if(chapter === navObj.currentChapter) {
+                toggleButton.click();
+                return false;
+            } else {
+                // Collapse all sections that are opened before moving on
+                dataMainMenu.forEach(function(dataMainMenuItem, i) {
+                    if(dataMainMenuItem['subChapters']) {
+                        delete dataMainMenuItem['subChapters'];
+                    }
+                });
+            }
         }
 
     });

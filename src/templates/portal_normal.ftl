@@ -123,12 +123,12 @@
 		<nav class="toggle-menu">
 			<ul class="toggle-menu-list">
 				{{#each areas}}
-					<li class="{{#if subChapters}}open{{/if}} {{get-chapter-selected-css-class this ../chapterClicked}}">
+					<li class="toggle-menu-list-item {{#if subChapters}}open{{/if}} {{get-chapter-selected-css-class this ../chapterClicked}}">
 						<div class="toggle-menu-item-main">
-							<a href="#/{{#isnt hasDrugs true}}advice{{/isnt}}{{#is hasDrugs true}}drugs{{/is}}/{{urlencode _title}}" class="js-mainmenu-item item-{{@index}}">
+							<a href="#/{{#isnt hasDrugs true}}advice{{/isnt}}{{#is hasDrugs true}}drugs{{/is}}/{{urlencode _title}}" class="js-mainmenu-item item-{{@index}}" data-chapter="{{urlencode _title}}" data-tab="{{#isnt hasDrugs true}}advice{{/isnt}}{{#is hasDrugs true}}drugs{{/is}}">
 								<span>{{_title}}</span>
 							</a>
-							<button class="toggle-submenu-button"data-chapter="{{urlencode _title}}" data-tab="{{#isnt hasDrugs true}}advice{{/isnt}}{{#is hasDrugs true}}drugs{{/is}}">
+							<button class="toggle-submenu-button" data-chapter="{{urlencode _title}}" data-tab="{{#isnt hasDrugs true}}advice{{/isnt}}{{#is hasDrugs true}}drugs{{/is}}">
 								{{#if subChapters}}
 									<span class="material-icons icon-remove">remove</span>
 								{{/if}}
