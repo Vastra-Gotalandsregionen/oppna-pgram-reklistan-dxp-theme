@@ -115,11 +115,13 @@
 	{{/if}}
 	-->
 	<div class="mainmenu-area-items">
+		<#--
 		<div class="list-item list-item-heading lt-medium">
 			<div class="list-item-text">
 				Områden
 			</div>
 		</div>
+		-->
 		<nav class="toggle-menu">
 			<ul class="toggle-menu-list">
 				{{#each areas}}
