@@ -1,5 +1,11 @@
 <div class="main-intro">
-    <h1>REKlistan</h1>
+    <div class="title">
+        <h1>REKlistan</h1>
+        <div class="logo">
+            <img src="${images_folder}/logo/vgr-logotyp.svg">
+        </div>
+    </div>
+
     <h2>Ett stöd för en god och säker läkemedelsanvändning</h2>
     <p>I REKlistan presenteras läkemedel som rekommenderas för behandling av vanliga sjukdomar.
         Rekommendationerna är grundade på vetenskaplig dokumentation avseende effekt och säkerhet, farmaceutisk ändamålsenlighet, kostnadseffektivitet och miljöaspekter.</p>

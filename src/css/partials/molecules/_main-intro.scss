@@ -2,11 +2,51 @@
   margin-top: 2rem;
 
   background: $color-gray-temp;
-  padding: 1.5rem;
-  border-top: 4px solid $color-vgr-blue;
+  //padding: 1.5rem;
+  padding: 2rem;
+  //border-top: 4px solid $color-vgr-blue;
+  //border: 1px solid $color-gray-temp2;
+  border: 1px solid $color-vgr-blue;
+  background: white;
 
   @include medium {
     margin-top: 2rem;
+  }
+
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    //flex-direction: row;
+    border-bottom: 4px solid $color-vgr-blue;
+    border-bottom: 1px solid $color-vgr-blue;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+
+
+    h1 {
+      margin: 0;
+    }
+
+    .logo {
+      display: none;
+      margin: 0;
+      max-width: 300px;
+      width: 30%;
+      padding: 0.5rem;
+      //background: white;
+      border: 1px solid $color-gray-temp;
+
+      img {
+      }
+
+      @include medium {
+        display: block;
+      }
+    }
+
+
+
   }
 
   h1 {
