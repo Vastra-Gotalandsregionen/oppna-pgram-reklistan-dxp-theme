@@ -25,18 +25,17 @@
 
 
 .link-list {
-
+	margin-top: 1rem;
 
 	h2 {
-		margin: 5px;
+		margin: 0.3125rem;
 		@include rhythm(1, 0, 0, 0);
-		font-size: 20px;
+		font-size: 1.25rem;
 		font-weight: 300;
 	}
 
 	ul {
 		list-style-type: none;
-		margin: 0 5px;
 		margin: 0;
 		padding: 0;
 	}
@@ -45,16 +44,6 @@
 		list-style-type: none;
 		padding: 0;
 		@include border-bottom-line();
-
-		&:first-child {
-			margin-top: 5px;
-			margin-top: 1rem;
-		}
-
-		&:last-child {
-			margin-bottom: 5px;
-			margin-bottom: 1rem;
-		}
 	}
 
 	a, 
@@ -64,15 +53,17 @@
 
 	a {
 		color: rgba(0, 0, 0, 0.57);
-		padding: 7px 14px;	
+		padding: 0.5rem 1rem;
 		display: block;	
 		text-decoration: none;
-
-//		transition: background-color 150ms;		
 	}
 
 	.no-touch & a:hover {
 		background-color: $color-yellow-halfandhalf;
 	}	
 
+}
+
+.link-list + .link-list {
+	margin-top: 0;
 }
