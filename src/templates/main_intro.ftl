@@ -1,6 +1,6 @@
 <div class="main-intro">
     <div class="title">
-        <h1>REKlistan</h1>
+        <h1><strong>REK</strong>listan</h1>
         <div class="logo">
             <img src="${images_folder}/logo/vgr-logotyp.svg">
         </div>
