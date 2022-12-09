@@ -194,40 +194,6 @@
 			</ul>
 		</div>
 
-		<#--
-		{{#if news}}
-			<div class="link-list">
-				<h2>${txtNews}</h2>
-				<ul>
-					{{#each news}}
-						{{#if externallink}}
-							<li><a href="{{externallink}}" target="_blank"><i class="flaticon-external1"></i> {{title}}</a></li>
-						{{/if}}
-						{{#unless externallink}}
-							<li><a href="#/news/{{id}}"><i class="flaticon-keyboard53"></i> {{title}}</a></li>
-						{{/unless}}
-					{{/each}}
-				</ul>
-
-			</div>
-		{{/if}}
-		{{#if resources}}
-			<div class="link-list">
-				<h2>${txtResources}</h2>
-				<ul>
-					{{#each resources}}
-						{{#if externallink}}
-							<li><a href="{{externallink}}" target="_blank"><i class="flaticon-external1"></i> {{title}}</a></li>
-						{{/if}}
-						{{#unless externallink}}
-							<li><a href="#/resource/{{urlencode title}}"><i class="flaticon-keyboard53"></i> {{title}}</a></li>
-						{{/unless}}
-					{{/each}}
-				</ul>
-			</div>
-		{{/if}}
-		-->
-
 	</div>
 </script>
 
@@ -236,6 +202,36 @@
 <script id="fly-menu-template" type="text/x-handlebars-template">
 	<div class="fly-menu-wrapper">
 		<div class="fly-menu">
+			{{#each news}}
+				{{#if externallink}}
+					<a href="{{externallink}}" target="_blank" class="list-item js-fly-menu-link">
+						<div class="list-item-icon">
+							<i class="flaticon-external1 icon-15x"></i>
+						</div>
+						<div class="list-item-text">{{title}}</div>
+					</a>
+				{{/if}}
+				{{#unless externallink}}
+					{{#if linktoarticle}}
+						<a href="#/{{linktoarticle}}" class="list-item js-fly-menu-link">
+							<div class="list-item-icon">
+								<i class="flaticon-keyboard53 icon-15x"></i>
+							</div>
+							<div class="list-item-text">{{title}}</div>
+						</a>
+					{{/if}}
+					{{#unless linktoarticle}}
+						<a href="#/news/{{id}}" class="list-item js-fly-menu-link">
+							<div class="list-item-icon">
+								<i class="flaticon-keyboard53 icon-15x"></i>
+							</div>
+							<div class="list-item-text">{{title}}</div>
+						</a>
+					{{/unless}}
+				{{/unless}}
+			{{/each}}
+
+
 			{{#each resources}}
 				{{#if externallink}}
 					<a href="{{externallink}}" target="_blank" class="list-item js-fly-menu-link">
@@ -246,9 +242,22 @@
 					</a>
 				{{/if}}
 				{{#unless externallink}}
-					<a href="#/resource/{{urlencode title}}" class="list-item js-fly-menu-link">
-						<div class="list-item-text">{{title}}</div>
-					</a>
+					{{#if linktoarticle}}
+						<a href="#/{{linktoarticle}}" class="list-item js-fly-menu-link">
+							<div class="list-item-icon">
+								<i class="flaticon-keyboard53 icon-15x"></i>
+							</div>
+							<div class="list-item-text">{{title}}</div>
+						</a>
+					{{/if}}
+					{{#unless linktoarticle}}
+						<a href="#/resource/{{urlencode title}}" class="list-item js-fly-menu-link">
+							<div class="list-item-icon">
+								<i class="flaticon-keyboard53 icon-15x"></i>
+							</div>
+							<div class="list-item-text">{{title}}</div>
+						</a>
+					{{/unless}}
 				{{/unless}}
 			{{/each}}
 		</div>
