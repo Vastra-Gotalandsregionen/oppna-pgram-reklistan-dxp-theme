@@ -83,45 +83,12 @@
 		</div>
 	</div>
 	<div id="search-results-placeholder"></div>
-	<#--
+
 	<div class="main-menu-logo">
 		<img src="${images_folder}/logo/vgr-logotyp.svg">
 	</div>
-	-->
-	<#--
-	{{#if news}}
-		<div class="main-menu-news-container js-main-menu-news-container lt-medium">
-			<div class="list-item list-item-heading">
-				<div class="list-item-text">
-					${txtNews}
-				</div>
-			</div>
-			{{#each news}}
-				{{#if externallink}}
-					<a href="{{externallink}}" target="_blank" class="list-item item-{{@index}}">
-					<div class="list-item-icon">
-						<i class="flaticon-external1"></i>
-					</div>
-				{{/if}}
-				{{#unless externallink}}
-					<a href="#/news/{{id}}" class="list-item item-{{@index}}">
-				{{/unless}}
-				<div class="list-item-text">
-					{{title}}
-				</div>
-				</a>
-			{{/each}}
-		</div>
-	{{/if}}
-	-->
+
 	<div class="mainmenu-area-items">
-		<#--
-		<div class="list-item list-item-heading lt-medium">
-			<div class="list-item-text">
-				Områden
-			</div>
-		</div>
-		-->
 		<nav class="toggle-menu">
 			<ul class="toggle-menu-list">
 				{{#each areas}}
@@ -225,10 +192,6 @@
 					{{/each}}
 				{{/if}}
 			</ul>
-		</div>
-
-		<div class="vgr-logo">
-			<img src="${images_folder}/logo/vgr-logotyp.svg">
 		</div>
 
 		<#--

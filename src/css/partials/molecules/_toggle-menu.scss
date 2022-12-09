@@ -9,6 +9,14 @@
       background: transparent;
       border-bottom: 1px solid $color-gray-gallery;
 
+      &:first-child {
+        border-top: 1px solid $color-gray-gallery;
+
+        @include medium {
+          border-top: none;
+        }
+      }
+
       a {
         align-items: center;
         display: flex;

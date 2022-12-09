@@ -1,15 +1,15 @@
 .main-menu-logo {
 	// Set a fixed height to avoid flickering when expanding/collapsing submenus.
-	height: 135px;
+	//height: 135px;
 	display: flex;
 	justify-content: center;
 
 	img {
 		align-self: center;
-		max-height: 81px;
-		max-width: 400px;
-		padding: 24px 0;
-		width: 85%;
+		max-height: 70px;
+		padding: 1.5rem 0;
+		width: 80%;
+		transform: translateZ(0);
 	}
 
 	@include medium() {
