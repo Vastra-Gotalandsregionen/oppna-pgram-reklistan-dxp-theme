@@ -677,6 +677,14 @@ function initializeToggleSubmenuButtons(dataMainMenu, dataNews, dataResources) {
             event.stopPropagation();
             event.preventDefault();
 
+            dataMainMenu.forEach(function(dataMainMenuItem, i) {
+                if(dataMainMenuItem['subChapters']) {
+                    //console.log('dataMainMenuItem: ', dataMainMenuItem);
+                    delete dataMainMenuItem['subChapters'];
+                }
+            });
+
+
             toggleButton.click();
             return false;
         } else {
