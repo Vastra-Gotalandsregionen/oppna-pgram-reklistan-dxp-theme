@@ -62,9 +62,14 @@
 
 }
 
-@include medium {
-    .view-topper-details-advice .tabs,
-    .view-topper-details-drugs .tabs {
-        display: none;
-    }
+.view-topper-details-advice .tabs,
+.view-topper-details-drugs .tabs {
+    display: none;
 }
+
+//@include medium {
+//    .view-topper-details-advice .tabs,
+//    .view-topper-details-drugs .tabs {
+//        display: none;
+//    }
+//}
