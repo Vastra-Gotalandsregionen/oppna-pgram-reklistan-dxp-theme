@@ -14,44 +14,8 @@ var navObj = {
 
 var sizeMedium = 768;
 
-var rekData = {
-    mainMenuData: [],
-    dataDrugs: [],
-    dataAdvice: [],
-    dataResources: [],
-    dataNews: [],
-    hbsDrugs: '',
-    hbsAdvice: '',
-    hbsResources: '',
-    properties: {
-
-        // Local Dev
-        // companyId: 1674701,
-        // drugsStructureId: 1728835,
-        // adviceStructureId: 1728833,
-        // resourcesStructureId: 1728837,
-        // newsStructureId: 1770002,
-
-        // Stage
-        // companyId: 1674701,
-        // drugsStructureId: 1728835,
-        // adviceStructureId: 1728833,
-        // resourcesStructureId: 1728837,
-        // newsStructureId: 1770002,
-
-        // Live:
-        companyId: 1712101,
-        drugsStructureId: 1715233,
-        adviceStructureId: 1715235,
-        resourcesStructureId: 1715238,
-        newsStructureId: 2080202,
-
-        groupName: 'Guest',
-        locale: 'sv_SE',
-        secondsCacheData: 3600, //3600 == 1h.
-        rekVersion: 2
-    }
-};
+// Variable rekData has been moved to script in rek_data.ftl
+// Which environment that is active is controlled in init_environment.ftl
 
 function clearCache() {
     storage
@@ -388,8 +352,7 @@ function startApp(isFreshDataDownload, dataMainMenu, dataResources, dataNews, da
     registerHandlebarHelpers();
     Swag.registerHelpers(Handlebars);
     registerEvents();
-    initializeRoute();
-    createMenuesAndBigStartPage(dataMainMenu, dataResources, dataNews, dataYears);
+    initializeRoute(dataMainMenu, dataNews, dataResources, dataYears);
 
     // Initialize FastClick to make it snappier on mobile browsers.
     FastClick.attach(document.body);
@@ -416,32 +379,38 @@ function startApp(isFreshDataDownload, dataMainMenu, dataResources, dataNews, da
 
 var navigationCounter = 0;
 
-function initializeRoute() {
-
+function initializeRoute(dataMainMenu, dataNews, dataResources, dataYears) {
     routie({
         '/resource/:newsitem': function(resourceItem) {
             window.scrollTo(0, 0);
             showGeneric('resource', resourceItem);
             setBackButtonURL('#', navigationCounter++);
+            createMenuesAndBigStartPage(dataMainMenu, dataResources, dataNews, dataYears);
+            initializeToggleSubmenuButtons(dataMainMenu, dataNews, dataResources);
         },
         '/news/:newsitem': function(newsItem) {
             window.scrollTo(0, 0);
             showGeneric('news', newsItem);
             setBackButtonURL('#', navigationCounter++);
+            createMenuesAndBigStartPage(dataMainMenu, dataResources, dataNews, dataYears);
+            initializeToggleSubmenuButtons(dataMainMenu, dataNews, dataResources);
         },
         '/:tab/:chapter': function(tab, chapter) {
             window.scrollTo(0, 0);
-            showSubmenu(chapter, '', tab);
-            if (window.innerWidth >= 768) {
-                showFirstDetails(chapter, tab);
-            }
+            gotoChapterAndSection(chapter, '', tab, dataMainMenu, dataNews, dataResources);
+            showFirstDetails(chapter, tab);
             setBackButtonURL('#', navigationCounter++)
+            createMenuesAndBigStartPage(dataMainMenu, dataResources, dataNews, dataYears);
+            initializeToggleSubmenuButtons(dataMainMenu, dataNews, dataResources);
+
         },
         '/:tab/:chapter/:section': function(tab, chapter, section) {
             window.scrollTo(0, 0);
-            showSubmenu(chapter, section, tab);
+            gotoChapterAndSection(chapter, section, tab, dataMainMenu, dataNews, dataResources);
             showDetails(chapter, section, tab);
             setBackButtonURL('#/' + tab + '/' + chapter, navigationCounter++);
+            createMenuesAndBigStartPage(dataMainMenu, dataResources, dataNews, dataYears);
+            initializeToggleSubmenuButtons(dataMainMenu, dataNews, dataResources);
         },
         '/refresh': function() {
             clearCache();
@@ -451,6 +420,8 @@ function initializeRoute() {
         '*': function () {
             window.scrollTo(0, 0);
             backToMainMenu();
+            createMenuesAndBigStartPage(dataMainMenu, dataResources, dataNews, dataYears);
+            initializeToggleSubmenuButtons(dataMainMenu, dataNews, dataResources);
         }
     });
 }
@@ -476,15 +447,9 @@ function setBackButtonURL(url, counter) {
         });
     }
 
-    if (navObj.isMobileView) {
-        $('.js-navigation-button')
-            .attr("href", url)
-            .addClass('on');
-    } else {
-        $('.js-navigation-button')
+    $('.js-navigation-button')
             .attr("href", '#')
             .addClass('on');
-    }
 }
 
 /* ************************************************************************* *\
@@ -659,13 +624,95 @@ function showGeneric(type, clickedItem) {
     $('.section-details-generic table').stacktable({minColCount:2}); // Make responsive tables
 }
 
+function initializeToggleSubmenuButtons(dataMainMenu, dataNews, dataResources) {
+    var toggleButton = $('.toggle-submenu-button');
+    var levelOneLinks = $('.toggle-menu-item-main > a');
+
+    toggleButton.unbind('click');
+    levelOneLinks.unbind('click');
+    toggleButton.click(function (event) {
+        var chapter = event.currentTarget.dataset.chapter;
+        var tab = event.currentTarget.dataset.tab;
+
+        var filteredArr = getActiveTabData(tab).filter(function (entry) {
+            return (makeUrlSafe(entry.title, true) === chapter);
+        });
+        var filtered = filteredArr[0];
+
+        // Add type (drugs or advice) to object, to be able to use it in Handlebars
+        // and create links with it.
+        filtered.tab = tab;
+
+        var foundArea = dataMainMenu.find(function(item) {
+            return makeUrlSafe(item._title) === chapter;
+        });
+
+        if (foundArea.subChapters) {
+            // Already expanded. Then minimize.
+            foundArea.subChapters = undefined;
+        } else {
+            foundArea.subChapters = filtered;
+        }
+
+        var data = {
+            areas: dataMainMenu,
+            news: dataNews,
+            resources: dataResources,
+            chapterClicked: chapter
+        };
+        printTemplate(data, "#main-menu-template", '#main-menu-placeholder');
+
+        $('.js-search-input-container').addClass('on');
+
+        initializeToggleSubmenuButtons(dataMainMenu, dataNews, dataResources);
+    });
+
+    levelOneLinks.click(function (event) {
+        var isMobile = navObj.isMobileView;
+        var toggleButton = $(event.currentTarget).siblings('.toggle-submenu-button');
+
+        var chapter = event.currentTarget.dataset.chapter;
+
+        if(isMobile) {
+            event.stopPropagation();
+            event.preventDefault();
+
+            dataMainMenu.forEach(function(dataMainMenuItem, i) {
+                if(dataMainMenuItem['subChapters']) {
+                    //console.log('dataMainMenuItem: ', dataMainMenuItem);
+                    delete dataMainMenuItem['subChapters'];
+                }
+            });
+
+
+            toggleButton.click();
+            return false;
+        } else {
+            if(chapter === navObj.currentChapter) {
+                toggleButton.click();
+                return false;
+            } else {
+                // Collapse all sections that are opened before moving on
+                dataMainMenu.forEach(function(dataMainMenuItem, i) {
+                    if(dataMainMenuItem['subChapters']) {
+                        delete dataMainMenuItem['subChapters'];
+                    }
+                });
+            }
+        }
+
+    });
+
+
+
+}
 
 /* ************************************************************************* *\
  *
  * SHOW SUBMENU
  *
 \* ************************************************************************* */
-function showSubmenu(chapter, section, tab) {
+function gotoChapterAndSection(chapter, section, tab, dataMainMenu, dataNews, dataResources) {
     // TODO - Add error handling to see if chapter exist
 
     backToSubmenu();
@@ -674,6 +721,8 @@ function showSubmenu(chapter, section, tab) {
     var jqMainMenu = $('#mainmenu');
     var jqSubmenu = $('#submenu-' + tab);
 
+    jqMainMenu.removeClass('showing-searchresults');
+
     // Filter big fat data array to only show current chapter and print template
     var filteredArr = getActiveTabData(tab).filter(function (entry) {
         return (makeUrlSafe(entry.title, true) === chapter);
@@ -681,7 +730,7 @@ function showSubmenu(chapter, section, tab) {
     var filtered = filteredArr[0];
 
     // Set Current View
-    setCurrentView('submenu', chapter, '');
+    setCurrentView('details', chapter, '');
 
     // Add type (drugs or advice) to object, to be able to use it in Handlebars
     // and create links with it.
@@ -717,23 +766,24 @@ function showSubmenu(chapter, section, tab) {
         }
     }
 
-    printTemplate(filtered, "#submenu-template", '#submenu-' + tab + '-placeholder');
+    var foundArea = dataMainMenu.find(function(item) {
+        return makeUrlSafe(item._title) === chapter;
+    });
 
-    // Remove active classes for big screen
-    if (tab === 'drugs') {
-        $('#submenu-advice')
-            .removeClass('active')
-            .removeClass('active-submenu');
-    } else {
-        $('#submenu-drugs')
-            .removeClass('active')
-            .removeClass('active-submenu');
-    }
+    foundArea.subChapters = filtered;
+
+    var data = {
+        areas: dataMainMenu,
+        news: dataNews,
+        resources: dataResources
+    };
+    printTemplate(data, "#main-menu-template", '#main-menu-placeholder');
+    $('.js-search-input-container').addClass('on');
+
+    initializeToggleSubmenuButtons(dataMainMenu, dataNews, dataResources);
 
     // Flip Active Classes
     jqMainMenu.removeClass('active');
-    jqSubmenu.addClass('active');
-    jqSubmenu.addClass('active-submenu');
 
     // Remove all previous highlights
     $('.js-submenu-item').removeClass('active-menu-item');
@@ -1010,6 +1060,22 @@ function registerHandlebarHelpers() {
         return new Handlebars.SafeString(ret);
     });
 
+    Handlebars.registerHelper('hasLinkToArticleOrSite', function(context) {
+        var hasLinkToArticleOrSite = context.some(function (field) {
+            if (field.name) {
+                if (field.name === 'linktoarticle' || field.name === 'linktosite') {
+                    if (field.value.length > 0) {
+                        hasLinkToArticleOrSite = true;
+                        return true;
+                    }
+                }
+            }
+            return false;
+        });
+
+        return hasLinkToArticleOrSite;
+    });
+
     Handlebars.registerHelper('findLinkToArticle', function(context) {
         var foundLinkToArticle = null;
         var hasLinkToArticle = context.some(function (field) {
@@ -1030,6 +1096,28 @@ function registerHandlebarHelpers() {
             return false;
         }
     });
+
+    Handlebars.registerHelper('findLinkToSite', function(context) {
+        var foundLinkToSite = null;
+        var hasLinkToSite = context.some(function (field) {
+            if (field.name) {
+                if (field.name === 'linktosite') {
+                    if (field.value.length > 0) {
+                        foundLinkToSite = field.value;
+                        return true;
+                    }
+                }
+            }
+            return false;
+        });
+
+        if (hasLinkToSite) {
+            return foundLinkToSite;
+        } else {
+            return false;
+        }
+    });
+
 
     /**
      * Parse the text and do some replacing
@@ -1052,6 +1140,39 @@ function registerHandlebarHelpers() {
 
         return new Handlebars.SafeString(text);
     });
+
+    Handlebars.registerHelper('get-chapter-selected-css-class', function(context, chapterClicked) {
+        var urlSafeTitle = makeUrlSafe(context._title, true);
+
+        var cssClass = '';
+
+        if(urlSafeTitle === navObj.currentChapter) {
+            if(navObj.currentDetails === '') {
+                cssClass = 'selected current';
+            } else {
+                cssClass = 'selected';
+            }
+        } else {
+            cssClass = '';
+        }
+
+        if(urlSafeTitle === chapterClicked) {
+            cssClass += ' clicked';
+        }
+
+        return cssClass;
+    });
+
+    Handlebars.registerHelper('get-details-selected-css-class', function(context) {
+        var urlSafeTitle = makeUrlSafe(context.value, true);
+
+        if(urlSafeTitle === navObj.currentDetails) {
+            return 'current';
+        } else {
+            return '';
+        }
+    });
+
 }
 
 /**

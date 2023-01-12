@@ -4,7 +4,7 @@
 	@include link-inverse();
     @extend .shadow-z-1;
 
-    height: 56px;
+    height: $appbar-height;
     width: 100%;
 }
 
@@ -23,7 +23,7 @@
     background: none;
     border: none;
     @include text-inverse();
-    line-height: $appbar-height;
+    //line-height: $appbar-height;
     float: left;
 }
 
@@ -44,8 +44,8 @@
 
 .appbar-menu-title {
     line-height: 40px;
-    padding: 0 13px;
-    font-size: 20px;
+    padding: 0;
+    font-size: 1.5rem;
 
     a,
     a:visited,
@@ -53,17 +53,28 @@
     a:hover {
         color: $color-white;
         text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0.5rem 3.5rem 0 3.5rem;
+        padding: 0;
+
+        img {
+            height: 2rem;
+            margin-right: 0.5rem;
+        }
     }
 
     .appbar-menu-sub-title {
         position: absolute;
         text-align: center;
-        margin: 0 auto 0 calc(50% - 143px);
         text-decoration: none;
-        font-size: 13px;
-        bottom: 6px;
+        font-size: 0.875rem;
+        bottom: 0;
         line-height: 12px;
-        font-weight: 300;
+        font-weight: 400;
+        width: 100%;
+        margin: 0 1rem 0.5rem 1rem;
     }
 }
 
@@ -73,7 +84,9 @@
  */
 .appbar-menu-sink-wrapper {
     position: absolute;
-    height: $appbar-height;
+    height: calc(#{$appbar-height} - 0.5rem);
+    left: 0.25rem;
+    top: 0.5rem;
 
     @include translate(-50px, 0);
     @include opacity(0);
@@ -99,7 +112,9 @@
 .appbar-menu-back-wrapper {
     position: absolute;
     cursor: pointer;
-    height: $appbar-height;
+    height: calc(#{$appbar-height} - 0.5rem);
+    left: 0.25rem;
+    top: 0.5rem;
 
     @include translate(0, 0);
     @include opacity(1);
@@ -120,8 +135,9 @@
 }
 
 .appbar-menu-back-label {
-    line-height: $appbar-height;
     font-size: 20px;
     float: left;
     font-weight: 300;
+    height: 3rem;
+    line-height: 3rem;
 }

@@ -1,0 +1,68 @@
+.main-intro {
+  margin-top: 2rem;
+
+  background: $color-gray-temp;
+  padding: 1.5rem;
+  border: 1px solid $color-vgr-blue;
+  background: white;
+
+  @include medium {
+    margin-top: 2rem;
+  }
+
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 4px solid $color-vgr-blue;
+    border-bottom: 1px solid $color-vgr-blue;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+
+    h1 {
+      margin: 0;
+    }
+
+    .logo {
+      display: none;
+      margin: 0;
+      max-width: 300px;
+      width: 30%;
+
+      img {
+      }
+
+      @include medium {
+        display: block;
+      }
+    }
+
+
+
+  }
+
+  h1 {
+    font-size: 2rem;
+    color: $color-vgr-blue;
+    font-weight: 400;
+    margin-top: 0;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    @include medium {
+      font-size: 1.25rem;
+    }
+  }
+
+  p {
+    &:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+  }
+
+
+}

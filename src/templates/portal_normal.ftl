@@ -20,10 +20,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 	<link href="${themeDisplay.pathThemeRoot}/images/favicon.ico" rel="Shortcut Icon">
 	<link href='https://fonts.googleapis.com/css?family=Roboto:500,900italic,900,400italic,100,700italic,300,700,500italic,100italic,300italic,400' rel='stylesheet' type='text/css'>
-    <link class="lfr-css-file" href="${themeDisplay.pathThemeRoot}/css/main.css?browserId=${browserId}&themeId=${themeDisplay.themeId}&languageId=${themeDisplay.languageId}&b=${liferayBuild}&t=1" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined&display=block" rel="stylesheet">
+	<#--
+    <link class="lfr-css-file" href="${themeDisplay.pathThemeRoot}/css/main.css?browserId=${browserId}&themeId=${themeDisplay.themeId}&languageId=${themeDisplay.languageId}xx&b=${liferayBuild}&t=2" rel="stylesheet" type="text/css">
+    -->
+	<link class="lfr-css-file" data-senna-track="temporary" href="${css_main_file}?t=${rekBuildTicker}" rel="stylesheet" type="text/css" />
 	<script src="${themeDisplay.pathThemeRoot}/js/libs.min.js?t=1" type="text/javascript"></script>
     <script src="${themeDisplay.pathThemeRoot}/js/lunr.unicodeNormalizer.js?t=1" type="text/javascript"></script>
-	<#--<script src="${themeDisplay.pathThemeRoot}/js/main.js?browserId=${browserId}&languageId=${themeDisplay.languageId}&b=${liferayBuild}&t=${.now?datetime?iso_local}" type="text/javascript"></script>-->
+	<#include "${full_templates_path}/rek_data.ftl" />
 </head>
 
 <body class="${css_class}">
@@ -66,7 +70,7 @@
 <script id="main-menu-template" type="text/x-handlebars-template">
 	<div class="search-wrapper view-topper">
 		<div class="second-bar">
-			<div class="search-input-container js-search-input-container">
+			<div class="search-input-container js-search-input-container on">
 				<input type="text" class="search-input js-search-input" placeholder="Sök" autocorrect="off">
 				<a href="#" class="search-clear js-search-clear">Rensa <i class="flaticon-close47"></i></a>
 			</div>
@@ -79,77 +83,57 @@
 		</div>
 	</div>
 	<div id="search-results-placeholder"></div>
+
 	<div class="main-menu-logo">
-		<img src="${images_folder}/theme/vgr-w400-c.png">
+		<img src="${images_folder}/logo/vgr-logotyp.svg">
 	</div>
-	{{#if news}}
-		<div class="main-menu-news-container js-main-menu-news-container lt-medium">
-			<div class="list-item list-item-heading">
-				<div class="list-item-text">
-					${txtNews}
-				</div>
-			</div>
-			{{#each news}}
-				{{#if externallink}}
-					<a href="{{externallink}}" target="_blank" class="list-item item-{{@index}}">
-					<div class="list-item-icon">
-						<i class="flaticon-external1"></i>
-					</div>
-				{{/if}}
-				{{#unless externallink}}
-					<a href="#/news/{{id}}" class="list-item item-{{@index}}">
-				{{/unless}}
-				<div class="list-item-text">
-					{{title}}
-				</div>
-				</a>
-			{{/each}}
-		</div>
-	{{/if}}
+
 	<div class="mainmenu-area-items">
-		<div class="list-item list-item-heading lt-medium">
-			<div class="list-item-text">
-				Områden
-			</div>
-		</div>
-		{{#each areas}}
-			<a href="#/{{#isnt hasDrugs true}}advice{{/isnt}}{{#is hasDrugs true}}drugs{{/is}}/{{urlencode _title}}" class="list-item js-mainmenu-item item-{{@index}}">
-				<div class="list-item-text">
-					{{_title}}
-				</div>
-			</a>
-		{{/each}}
+		<nav class="toggle-menu">
+			<ul class="toggle-menu-list">
+				{{#each areas}}
+					<li class="toggle-menu-list-item {{#if subChapters}}open{{/if}} {{get-chapter-selected-css-class this ../chapterClicked}}">
+						<div class="toggle-menu-item-main">
+							<a href="#/{{#isnt hasDrugs true}}advice{{/isnt}}{{#is hasDrugs true}}drugs{{/is}}/{{urlencode _title}}" class="js-mainmenu-item item-{{@index}}" data-chapter="{{urlencode _title}}" data-tab="{{#isnt hasDrugs true}}advice{{/isnt}}{{#is hasDrugs true}}drugs{{/is}}">
+								<span>{{_title}}</span>
+							</a>
+							<button class="toggle-submenu-button" data-chapter="{{urlencode _title}}" data-tab="{{#isnt hasDrugs true}}advice{{/isnt}}{{#is hasDrugs true}}drugs{{/is}}">
+								{{#if subChapters}}
+									<span class="material-icons icon-remove">remove</span>
+								{{/if}}
+								{{#unless subChapters}}
+									<span class="material-icons icon-add">add</span>
+								{{/unless}}
+							 </button>
+						</div>
+						<#-- Submenu -->
+						<ul class="toggle-menu-list">
+							{{#each subChapters.fields}}
+								<li class="{{get-details-selected-css-class this}}">
+									{{#if (hasLinkToArticleOrSite children) }}
+										{{#if (findLinkToArticle children) }}
+											<a href="{{findLinkToArticle children}}" class="submenu-item item-{{@index}} js-submenu-item" >
+												<span>{{value}} <i class="flaticon-keyboard53"></i></span>
+											</a>
+										{{else}}
+											<a href="{{findLinkToSite children}}" class="submenu-item item-{{@index}} js-submenu-item" target="_BLANK" >
+												<span>{{value}} <i class="flaticon-external1"></i></span>
+											</a>
+										{{/if}}
+									{{else}}
+										<a href="#/{{../../subChapters.tab}}/{{urlencode ../../subChapters.title}}/{{urlencode value}}" class="submenu-item item-{{@index}} js-submenu-item">
+											<span>{{value}}</span>
+										</a>
+									{{/if}}
+								</li>
+							{{/each}}
+						</ul>
+					</li>
+				{{/each}}
+			</ul>
+		</nav>
 	</div>
 </script>
-
-
-<#-- HBS SUBMENU -->
-<script id="submenu-template" type="text/x-handlebars-template">
-	<div class="view-topper">
-		<div class="second-bar">
-			<h2 class="second-bar-title">{{title}}</h2>
-		</div>
-		<div class="js-submenu-tabs tabs">
-			<a href="#/drugs/{{urlencode title}}{{#if sameSectionOnOtherTab}}/{{sameSectionOnOtherTab}}{{/if}}" class="tab js-tab-item js-tab-item-drugs {{tabClassDrugs}}">${txtDrugs}</a>
-			<a href="#/advice/{{urlencode title}}{{#if sameSectionOnOtherTab}}/{{sameSectionOnOtherTab}}{{/if}}" class="tab js-tab-item js-tab-item-advice {{tabClassAdvice}}">${txtAdvice}</a>
-		</div>
-	</div>
-	{{#each fields}}
-    	{{#if (findLinkToArticle children) }}
-    		<a href="{{findLinkToArticle children}}" class="list-item submenu-item item-{{@index}} js-submenu-item">
-        {{else}}
-        	<a href="#/{{@root/tab}}/{{urlencode @root/title}}/{{urlencode value}}" class="list-item submenu-item item-{{@index}} js-submenu-item">
-		{{/if}}
-			{{#is children.0.children.0.value 'physical-exercise'}}
-				<div class="list-item-icon">
-					<i class="flaticon-man460 icon-15x"></i>
-				</div>
-			{{/is}}
-			<div class="list-item-text submenu-item-text">{{value}}</div>
-		</a>
-	{{/each}}
-</script>
-
 
 <#-- HBS NEWS -->
 <script id="news-template" type="text/x-handlebars-template">
@@ -169,40 +153,46 @@
 <#-- HBS FILLER -->
 <script id="filler-template" type="text/x-handlebars-template">
 	<div class="details-inner">
-		<div class="vgr-logo">
-			<img src="${images_folder}/theme/vgr-w400-c.png">
-		</div>
-		{{#if news}}
-			<div class="link-list">
-				<h2>${txtNews}</h2>
-				<ul>
+		<#include "${full_templates_path}/main_intro.ftl" />
+
+		<#if includeDummyLinkList>
+			<#include "${full_templates_path}/mock/dummy_link_list.ftl" />
+		</#if>
+
+		<div class="link-list">
+			<ul>
+				{{#if news}}
 					{{#each news}}
 						{{#if externallink}}
 							<li><a href="{{externallink}}" target="_blank"><i class="flaticon-external1"></i> {{title}}</a></li>
 						{{/if}}
 						{{#unless externallink}}
-							<li><a href="#/news/{{id}}"><i class="flaticon-keyboard53"></i> {{title}}</a></li>
+							{{#if linktoarticle}}
+								<li><a href="#/{{linktoarticle}}"><i class="flaticon-keyboard53"></i> {{title}}</a></li>
+							{{/if}}
+							{{#unless linktoarticle}}
+								<li><a href="#/news/{{id}}"><i class="flaticon-keyboard53"></i> {{title}}</a></li>
+							{{/unless}}
 						{{/unless}}
 					{{/each}}
-				</ul>
-
-			</div>
-		{{/if}}
-		{{#if resources}}
-			<div class="link-list">
-				<h2>${txtResources}</h2>
-				<ul>
+				{{/if}}
+				{{#if resources}}
 					{{#each resources}}
 						{{#if externallink}}
 							<li><a href="{{externallink}}" target="_blank"><i class="flaticon-external1"></i> {{title}}</a></li>
 						{{/if}}
 						{{#unless externallink}}
-							<li><a href="#/resource/{{urlencode title}}"><i class="flaticon-keyboard53"></i> {{title}}</a></li>
+							{{#if linktoarticle}}
+								<li><a href="#/{{linktoarticle}}"><i class="flaticon-keyboard53"></i> {{title}}</a></li>
+							{{/if}}
+							{{#unless linktoarticle}}
+								<li><a href="#/resource/{{urlencode title}}"><i class="flaticon-keyboard53"></i> {{title}}</a></li>
+							{{/unless}}
 						{{/unless}}
 					{{/each}}
-				</ul>
-			</div>
-		{{/if}}
+				{{/if}}
+			</ul>
+		</div>
 
 	</div>
 </script>
@@ -212,6 +202,36 @@
 <script id="fly-menu-template" type="text/x-handlebars-template">
 	<div class="fly-menu-wrapper">
 		<div class="fly-menu">
+			{{#each news}}
+				{{#if externallink}}
+					<a href="{{externallink}}" target="_blank" class="list-item js-fly-menu-link">
+						<div class="list-item-icon">
+							<i class="flaticon-external1 icon-15x"></i>
+						</div>
+						<div class="list-item-text">{{title}}</div>
+					</a>
+				{{/if}}
+				{{#unless externallink}}
+					{{#if linktoarticle}}
+						<a href="#/{{linktoarticle}}" class="list-item js-fly-menu-link">
+							<div class="list-item-icon">
+								<i class="flaticon-keyboard53 icon-15x"></i>
+							</div>
+							<div class="list-item-text">{{title}}</div>
+						</a>
+					{{/if}}
+					{{#unless linktoarticle}}
+						<a href="#/news/{{id}}" class="list-item js-fly-menu-link">
+							<div class="list-item-icon">
+								<i class="flaticon-keyboard53 icon-15x"></i>
+							</div>
+							<div class="list-item-text">{{title}}</div>
+						</a>
+					{{/unless}}
+				{{/unless}}
+			{{/each}}
+
+
 			{{#each resources}}
 				{{#if externallink}}
 					<a href="{{externallink}}" target="_blank" class="list-item js-fly-menu-link">
@@ -222,9 +242,22 @@
 					</a>
 				{{/if}}
 				{{#unless externallink}}
-					<a href="#/resource/{{urlencode title}}" class="list-item js-fly-menu-link">
-						<div class="list-item-text">{{title}}</div>
-					</a>
+					{{#if linktoarticle}}
+						<a href="#/{{linktoarticle}}" class="list-item js-fly-menu-link">
+							<div class="list-item-icon">
+								<i class="flaticon-keyboard53 icon-15x"></i>
+							</div>
+							<div class="list-item-text">{{title}}</div>
+						</a>
+					{{/if}}
+					{{#unless linktoarticle}}
+						<a href="#/resource/{{urlencode title}}" class="list-item js-fly-menu-link">
+							<div class="list-item-icon">
+								<i class="flaticon-keyboard53 icon-15x"></i>
+							</div>
+							<div class="list-item-text">{{title}}</div>
+						</a>
+					{{/unless}}
 				{{/unless}}
 			{{/each}}
 		</div>
@@ -265,19 +298,23 @@
 		<div class="appbar">
 			<div class="appbar-menu-title-wrapper">
                 <div class="appbar-menu-title">
-                    <a href="#">REK<span class="thin">listan <span id="revisionPlaceholder"></span></span></a>
+                    <a href="/">
+						<img src="${images_folder}/logo/reklista_pilar.svg">
+						<span class="appbar-menu-title-main">REK</span>
+						<span class="thin">listan <span id="revisionPlaceholder"></span></span>
+					</a>
                     <div class="appbar-menu-sub-title">Läkemedelskommittén i Västra Götalandsregionen</div>
                 </div>
             </div>
 
             <div class="appbar-menu-sink-wrapper js-appbar-menu-sink-toggle">
 				<div class="appbar-menu-sink-button">
-					<span class="flaticon-menu55 icon-4x"></span>
+					<span class="flaticon-menu55 icon-3x"></span>
 				</div>
 			</div>
 			<a class="appbar-menu-back-wrapper js-navigation-button">
 				<div class="appbar-menu-back-button">
-					<i class="flaticon-left216 icon-4x"></i>
+					<i class="flaticon-left216 icon-3x"></i>
 			    </div>
 		    	<div class="appbar-menu-back-label mt-small">Tillbaka</div>
 			</a>
@@ -308,7 +345,7 @@
 	</div>
 </div>
 
-<script src="${themeDisplay.pathThemeRoot}/js/main.js?browserId=${browserId}&languageId=${themeDisplay.languageId}&b=${liferayBuild}&t=154" type="text/javascript"></script>
+<script src="${themeDisplay.pathThemeRoot}/js/main.js?browserId=${browserId}&languageId=${themeDisplay.languageId}&b=${liferayBuild}&t=${rekBuildTicker}" type="text/javascript"></script>
 
 <script>
     initApp();

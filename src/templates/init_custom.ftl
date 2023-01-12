@@ -5,7 +5,6 @@
  #
  # -->
 
-
 <#assign browserId = 'other'>
 <#assign ReleaseLocalService = serviceLocator.findService("com.liferay.portal.kernel.service.ReleaseLocalService") />
 <#assign authTokenUtil = serviceLocator.findService("com.liferay.portal.kernel.security.auth.AuthTokenUtil") />
@@ -13,3 +12,5 @@
 <#assign authToken = authTokenUtil.getToken(request) />
 
 <#assign currentUserSignedIn = themeDisplay.isSignedIn() />
+
+<#include "${full_templates_path}/init_environment.ftl" />

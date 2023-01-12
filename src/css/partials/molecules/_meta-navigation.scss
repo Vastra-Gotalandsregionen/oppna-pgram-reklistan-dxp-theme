@@ -1,92 +1,75 @@
-.vgr-logo {
-	text-align: center;
-	margin-top: 56px;
-}
-
-
-/*
-.meta-navigation {
-
-	width: 60%;
-	margin: 0 auto;
-
-	ul {
-		border: 1px solid rgba(0, 0, 0, 0.12);
-		list-style-type: none;
-		padding: 0;
-	}
-
-	li {
-		list-style-type: none;
-	}
-
-	a, 
-	a:visited {
-    	color: rgba(0, 0, 0, 0.57);
-	}
-
-	a {
-		color: rgba(0, 0, 0, 0.57);
-		display: block;
-		padding: 0.5em 1em;
-		
-		transition: background-color 250ms;		
-	}
-
-	.no-touch & a:hover {
-		background-color: rgba(0, 0, 0, 0.12);
-	}
-
-}
-*/
-
 .details-inner {
-	width: 404px;
+	width: calc(100% - 2rem);
+	max-width: 700px;
 	margin: 0 auto;
-}
+	padding: 1rem;
 
+	.vgr-logo {
+		margin-top: 3rem;
+		text-align: center;
 
-.link-list {
-
-
-	h2 {
-		margin: 5px;
-		@include rhythm(1, 0, 0, 0);
-		font-size: 20px;
-		font-weight: 300;
+		img {
+			max-width: 300px;
+		}
 	}
 
-	ul {
-		list-style-type: none;
-		
-
-
-		margin: 5px;
+	@include medium {
 		padding: 0;
+
+		.vgr-logo {
+			display: none;
+			text-align: left;
+		}
 	}
 
-	li {
-		list-style-type: none;
-		padding: 0;
-		@include border-bottom-line();
+	.link-list {
+		display: none;
+		margin-top: 1rem;
+
+		@include medium {
+			display: block;
+		}
+
+		h2 {
+			margin: 0.3125rem;
+			@include rhythm(1, 0, 0, 0);
+			font-size: 1.25rem;
+			font-weight: 300;
+		}
+
+		ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		li {
+			list-style-type: none;
+			padding: 0;
+			@include border-bottom-line();
+		}
+
+		a,
+		a:visited {
+			color: rgba(0, 0, 0, 0.57);
+		}
+
+		a {
+			color: rgba(0, 0, 0, 0.57);
+			padding: 0.5rem 1rem;
+			display: block;
+			text-decoration: none;
+		}
+
+		.no-touch & a:hover {
+			background-color: $color-yellow-halfandhalf;
+		}
+
 	}
 
-	a, 
-	a:visited {
-    	color: rgba(0, 0, 0, 0.57);
+	.link-list + .link-list {
+		margin-top: 0;
 	}
 
-	a {
-		color: rgba(0, 0, 0, 0.57);
-		padding: 7px 14px;	
-		display: block;	
-		text-decoration: none;
-
-//		transition: background-color 150ms;		
-	}
-
-	.no-touch & a:hover {
-		background-color: $color-yellow-halfandhalf;
-	}	
 
 }
