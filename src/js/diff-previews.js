@@ -32,30 +32,30 @@
       jqHtmlDiffTarget.html(articleDiff);
 
       // Show and hide the previews
-      $('.toggle-show-published').click(function (event) {
+      /*$('.toggle-show-published').click(function (event) {
         event.preventDefault();
-        $('.preview-box-draft').addClass('hide');
-      });
+        $('.preview-box-draft').addClass('hide hide-me');
+      });*/
 
-      $('.toggle-show-draft').click(function (event) {
+      /*$('.toggle-show-draft').click(function (event) {
           event.preventDefault();
-          $('.preview-box-draft').removeClass('hide');
-      });
+          $('.preview-box-draft').removeClass('hide hide-me');
+      });*/
 
       $('.checkbox-show-preview-published-draft').change(function () {
           if (this.checked) {
-              $('.preview-box-draft').removeClass('hide');
+              $('.preview-box-draft').removeClass('hide hide-me');
           } else {
-              $('.preview-box-draft').addClass('hide');
+              $('.preview-box-draft').addClass('hide hide-me');
           }
           setSinglePreviewClass();
       });
 
       $('.checkbox-show-preview-diff').change(function () {
           if (this.checked) {
-              $('.preview-box-diff').removeClass('hide');
+              $('.preview-box-diff').removeClass('hide hide-me');
           } else {
-              $('.preview-box-diff').addClass('hide');
+              $('.preview-box-diff').addClass('hide hide-me');
           }
           setSinglePreviewClass();
       });
