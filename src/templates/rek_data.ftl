@@ -18,7 +18,7 @@
             groupName: '${liferayGroupName}',
             locale: 'sv_SE',
             secondsCacheData: 3600, //3600 == 1h.
-            rekVersion: 2
+            rekVersion: 3
         }
     };
 </script>
