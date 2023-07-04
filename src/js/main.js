@@ -1133,7 +1133,7 @@ function registerHandlebarHelpers() {
 
         // Convert {{replaceable}} with icon
         text = text.replace(/\{\{replaceable\}\}/g, '<span class="replaceable">&#8860;</span>');
-        text = text.replace(/\{\{child\}\}/g, '<img src="/o/reklistan-theme/images/theme/child.png" class="child-icon">');
+        text = text.replace(/\{\{child\}\}/g, '<img src="/o/reklistan-theme/images/theme/symbol-child.svg" class="child-icon">');
 
         // Make sure external links open in new tab/window
         text = text.replace(/href=[\"\'](http[s]?\:\/\/[^\"\']+)[\"\']/gi, 'href="$1" target="_blank"');
