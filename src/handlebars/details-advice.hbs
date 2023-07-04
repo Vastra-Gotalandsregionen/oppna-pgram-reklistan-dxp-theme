@@ -28,6 +28,9 @@
                     {{#is children.0.value 'for-childs'}}
                         <img src="/o/reklistan-theme/images/theme/symbol-child.svg" class="child-icon">
                     {{/is}}
+                    {{#is children.0.value 'for-elderly'}}
+                        <img src="/o/reklistan-theme/images/theme/symbol-elderly.svg" class="elderly-icon">
+                    {{/is}}
                     {{{markdownify value}}}
                     {{#each children}}
                         {{#is name 'image'}}
